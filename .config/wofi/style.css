@@ -1,0 +1,30 @@
+* {
+  font-family: Maple Mono;
+  color: #d8cab8;
+}
+
+window {
+  color: #d8cab8;
+  border-color: rgba(23, 61, 150, 0.8);
+  border-style: solid;
+  border-width: 1px;
+  background-color: rgba(23, 61, 150, 0.8);
+  border-radius: 14px;
+  font-size:28px;
+}
+
+#input {
+  background-color: rgba(23, 61, 150, 0.8);
+  color: white;
+  border-radius: 14px;
+  border-color: rgba(23, 61, 150, 0.8);
+}
+
+#entry{
+    padding:0.25em;
+}
+
+image {
+    margin-left: .25em;
+    margin-right: .25em;
+}
