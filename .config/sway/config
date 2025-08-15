@@ -22,7 +22,7 @@ set $menu wofi --show drun
 set $file_explorer nautilus
 
 ### Output configuration
-output * bg ~/Pictures/miku.jpg fill
+output * bg ~/Pictures/miku3.jpg fill
 
 output eDP-1 resolution 1920x1080 position 1920,0
 
