@@ -1,8 +1,8 @@
+mode=drun
 show=drun
 term=kitty
-show_all=true
 location=top
-insensitive=false
+insensitive=true
 allow_markup=true
 allow_images=true
 line_wrap=word
