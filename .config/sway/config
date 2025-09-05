@@ -76,7 +76,7 @@ client.placeholder      #03326E #1C1627 #0ADAF8 #03326E #03326E
    }
 
    input type:keyboard {
-       xkb_layout "de"
+       xkb_layout "us"
    }
 
 # You can also configure each device individually.
