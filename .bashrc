@@ -35,3 +35,6 @@ alias general_push='bash ~/Homo_Deus/Programming/Bash/git_general_push.sh'
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
+
+# Starship
+eval "$(starship init bash)"
