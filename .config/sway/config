@@ -16,7 +16,7 @@ set $right l
 # Your preferred terminal emulator
 set $term kitty
 # Your preferred application launcher
-set $menu wofi --show run
+set $menu wofi --show drun
 
 # File explorer
 set $file_explorer nautilus
@@ -31,8 +31,8 @@ output eDP-1 resolution 1920x1080 position 1920,0
 
 ### Gaps
 
-gaps inner 8px
-gaps outer 8px
+gaps inner 4px
+gaps outer 4px
 
 ### Borders
 default_border pixel 1px 
@@ -55,11 +55,11 @@ client.placeholder      #03326E #1C1627 #0ADAF8 #03326E #03326E
 #
 # Example configuration:
 #
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
+exec swayidle -w \
+          timeout 300 'swaylock -f -c 000000' \
+          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+          before-sleep 'swaylock -f -c 000000'
+
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.

@@ -21,13 +21,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- Set vim specific config
-require("vim-options")
 require("keymaps")
 
 -- Setup lazy.nvim
 require("lazy").setup("plugins")
 require("luasnip.loaders.from_vscode").lazy_load()
-
+require("vim-options")
 -- Set colorschemes from the vim catalog or from the colors folder
 --vim.cmd("colorscheme yuyuko")
 

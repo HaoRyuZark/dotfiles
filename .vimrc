@@ -6,8 +6,6 @@ set autoindent
 
 set mouse=a
 
-set background=dark
-
 colorscheme zaibatsu
 
 set cursorline

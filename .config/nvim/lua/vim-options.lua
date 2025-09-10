@@ -6,6 +6,7 @@ vim.cmd("set shiftwidth=4")
 
 -- Syntax highlighting
 vim.cmd("syntax enable")
+
 -- Row numbers
 vim.cmd("set number")
 
@@ -18,18 +19,19 @@ vim.cmd('filetype plugin on')
 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 
 -- Transparency
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
-vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
+--vim.api.nvim_set_hl(0, "Normal", { bg = "None" })
+--vim.api.nvim_set_hl(0, "NormalNC", { bg = "None" })
+--vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "None" })
 
 -- Visuals
 vim.opt.termguicolors = true
-vim.opt.background = "dark"
+vim.opt.showmatch = true 
 
 -- Search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
+vim.opt.hlsearch = false 
 
 -- Clipboard
 vim.opt.clipboard = "unnamedplus"
