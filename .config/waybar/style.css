@@ -9,8 +9,7 @@
 }
 
 window#waybar {
-    background-color: rgba(50, 50, 50, 0.9);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    background-color: rgba(108,209,248, 0.4);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -79,10 +78,12 @@ window#waybar.chromium {
 #tray,
 #mode,
 #idle_inhibitor,
+#memory,
+#temperature,
 #mpd {
     padding: 0 10px;
     margin: 6px 3px; 
-    color: #333333;
+    color: white;
 }
 
 #window,
@@ -101,12 +102,11 @@ window#waybar.chromium {
 }
 
 #clock {
-    background-color: #bbccdd;
+    background-color: #363a68;
 }
 
 #battery {
-    background-color: #bbccdd;
-    color: #333333;
+    background-color: #363a68;
 }
 
 #battery.charging {
@@ -136,20 +136,19 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71;
-    color: #333333;
+    background-color: #363a68;
 }
 
 #memory {
-    background-color: #9b59b6;
+    background-color: #363a68;
 }
 
 #backlight {
-    background-color: #bbccdd;
+    background-color: #363a68;
 }
 
 #network {
-    background-color: #bbccdd;
+    background-color: #363a68;
 }
 
 #network.disconnected {
@@ -157,13 +156,11 @@ label:focus {
 }
 
 #pulseaudio {
-    background-color: #bbccdd;
-    color: #333333;
+    background-color: #363a68;
 }
 
 #pulseaudio.muted {
-    background-color: #bbccdd;
-    color: #333333;
+    background-color: #363a68;
 }
 
 #custom-media {
@@ -181,7 +178,7 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
+    background-color: #363a68;
 }
 
 #temperature.critical {
@@ -198,12 +195,10 @@ label:focus {
 
 #idle_inhibitor.activated {
     background-color: #ecf0f1;
-    color: #2d3436;
 }
 
 #mpd {
     background-color: #66cc99;
-    color: #2a5c45;
 }
 
 #mpd.disconnected {
@@ -219,8 +214,7 @@ label:focus {
 }
 
 #language {
-    background: #bbccdd;
-    color: #333333;
+    background: #363a68;
     padding: 0 5px;
     margin: 6px 3px;
     min-width: 16px;

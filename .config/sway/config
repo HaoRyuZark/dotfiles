@@ -34,8 +34,8 @@ gaps inner 4px
 gaps outer 4px
 
 ### Borders
-default_border pixel 1px 
-default_floating_border pixel 1px 
+default_border pixel 5px 
+default_floating_border pixel 5px 
 
 #--telemagenta: #D1337B;
 #--vivid-sky-blue: #0ADAF8;
