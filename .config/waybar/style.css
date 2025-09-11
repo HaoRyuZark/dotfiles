@@ -9,7 +9,7 @@
 }
 
 window#waybar {
-    background-color: rgba(108,209,248, 0.4);
+    background-color: rgba(108,209,248, 0.0);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -90,7 +90,12 @@ window#waybar.chromium {
     color: white;
 }
 
-#window,
+#window {
+    padding: 0 10px;
+    margin: 6px 3px; 
+    background-color: #363a68;
+}
+
 #workspaces {
     margin: 0 4px;
 }
