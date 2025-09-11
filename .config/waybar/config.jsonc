@@ -3,7 +3,7 @@
     
     "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
     
-    "modules-center": ["sway/window"],
+    /*"modules-center": ["sway/window"],*/
     
     "modules-right": ["pulseaudio", "network", "backlight", "sway/language", "battery", "battery#bat2", "clock", "tray", "memory","temperature"],
     

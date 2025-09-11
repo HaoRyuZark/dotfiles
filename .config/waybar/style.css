@@ -20,22 +20,8 @@ window#waybar.hidden {
     opacity: 0.2;
 }
 
-/*
 window#waybar.empty {
     background-color: transparent;
-}
-window#waybar.solo {
-    background-color: #FFFFFF;
-}
-*/
-
-window#waybar.termite {
-    background-color: #3F3F3F;
-}
-
-window#waybar.chromium {
-    background-color: #000000;
-    border: none;
 }
 
 #workspaces button {
@@ -90,11 +76,14 @@ window#waybar.chromium {
     color: white;
 }
 
+/*
 #window {
     padding: 0 10px;
     margin: 6px 3px; 
     background-color: #363a68;
 }
+
+*/
 
 #workspaces {
     margin: 0 4px;
