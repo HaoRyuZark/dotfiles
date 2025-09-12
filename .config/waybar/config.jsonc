@@ -5,7 +5,7 @@
     
     /*"modules-center": ["sway/window"],*/
     
-    "modules-right": ["pulseaudio", "network", "backlight", "sway/language", "battery", "battery#bat2", "clock", "tray", "memory","temperature"],
+    "modules-right": ["pulseaudio", "network","sway/language", "battery", "battery#bat2", "clock", "tray", "memory","temperature"],
     
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
