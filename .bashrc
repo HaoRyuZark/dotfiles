@@ -30,9 +30,7 @@ export PS1="${CYAN}\u${RESET}@${BLUE}\h${RESET}:${MAGENTA}\w\$(parse_git_branch)
 
 # Aliases
 alias ll='ls -la --color=auto'
-alias general_pull='bash ~/Homo_Deus/Programming/Bash/git_general_pull.sh'
-alias general_push='bash ~/Homo_Deus/Programming/Bash/git_general_push.sh'
-
+alias gp='bash $HOME/Homo_Deus/Programming/Bash/gp.sh'
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
 
