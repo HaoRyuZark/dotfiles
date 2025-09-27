@@ -20,6 +20,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+require{"lsp"}
 -- Set vim specific config
 require("keymaps")
 
@@ -27,6 +28,5 @@ require("keymaps")
 require("lazy").setup("plugins")
 require("luasnip.loaders.from_vscode").lazy_load()
 require("vim-options")
--- Set colorschemes from the vim catalog or from the colors folder
---vim.cmd("colorscheme yuyuko")
+
 

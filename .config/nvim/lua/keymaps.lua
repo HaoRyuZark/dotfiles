@@ -37,3 +37,17 @@ vim.keymap.set("n", "<leader>tp", "<cmd>tabp<CR>")     --go to pre
 vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>") --open current tab in new tab
 
 vim.keymap.set("n", "<leader>cd", vim.cmd.Ex, { desc = "Opens the netrw File Explorer"})
+
+-- Lsp 
+vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, {buffer = 0, desc = 'Hover'})
+vim.keymap.set("n", "<leader>gD", vim.lsp.buf.definition, {buffer = 0, desc = 'Get definition'})
+vim.keymap.set("n", "<leader>gd", vim.lsp.buf.declaration, {buffer = 0, desc = 'Get declaration'})
+vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {buffer = 0, desc = 'Get references'})
+vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, {buffer = 0, desc = 'Get implemenation'})
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {buffer = 0, desc = 'Code action'})
+vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, {buffer = 0, desc ='Go to next'})
+vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, {buffer = 0, desc ='Go to previous'})
+vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", {buffer = 0, desc ='Get telescope diagnostics'})
+vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {buffer = 0, desc ='Rename'})
+vim.keymap.set("n", "<leader>fr", require("telescope.builtin").lsp_references, {buffer = 0, desc = 'Get references' })
+
