@@ -72,4 +72,3 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.spelllang = "en_us"
     end,
 })
-
