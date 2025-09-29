@@ -67,7 +67,6 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "md", "env", "tex", "text" },
     callback = function(opts)
-        local cmp = require("cmp")
         vim.opt.spell = true
         vim.opt.spelllang = "en_us"
     end,

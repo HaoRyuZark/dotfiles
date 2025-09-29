@@ -50,3 +50,11 @@ vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, {buffer = 0, desc ='
 vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", {buffer = 0, desc ='Get telescope diagnostics'})
 vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {buffer = 0, desc ='Rename'})
 vim.keymap.set("n", "<leader>fr", require("telescope.builtin").lsp_references, {buffer = 0, desc = 'Get references' })
+
+
+-- Neo Tree 
+vim.keymap.set("n", "<leader>e", ":Neotree filesystem reveal right<CR>", {desc = 'Open/Close filesystem'}) --open neotree
+vim.keymap.set("n", "<leader>e",":Neotree toggle right<CR>", { noremap = true, silent = true }) --close neotree
+
+
+

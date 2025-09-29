@@ -399,7 +399,32 @@ return require("lazy").setup({
       vim.keymap.set("n", "-", oil.toggle_float, {})
     end,
   },
+  {
+      
+      "nvim-neo-tree/neo-tree.nvim",
+      branch = "v3.x",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+        "MunifTanjim/nui.nvim",
+      },
 
+      config = function()
+      
+      
+      require("neo-tree").setup({
+          filesystem = {
+              filtered_items = {
+                  visible = true,
+                  hide_dot_files = false,
+                  hide_git_ignore = false,
+              },
+          }
+      })    
+    
+    end,
+
+  },
     -- }}}
 
     -- {{{ IntelliSense
@@ -418,8 +443,8 @@ return require("lazy").setup({
                 "lua_ls",
                 "bashls",
                 "pyright",
-                "rust_analyzer",
                 "asm_ls",
+                "texlab",
                 "sqlls",
             })
             
@@ -441,20 +466,8 @@ return require("lazy").setup({
       
             vim.lsp.config("java_ls", {})
             
-            vim.lsp.config("rust_analyzer", {
-                settings = {
-                    ["rust-analyzer"] = {
-                        procMacro = {
-                            ignored = {
-                                leptos_macro = {
-                                    "server",
-                                },
-                            },
-                        },
-                    },
-                },
-            })
-             
+            vim.lsp.config("texlab", {})
+
             require("blink.cmp").setup({
                 keymap = {
                     preset = "enter",
@@ -495,7 +508,59 @@ return require("lazy").setup({
             })
         end,
     },
-
+    
+  {
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {
+      lsp = {
+        override = {
+          ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+          ["vim.lsp.util.stylize_markdown"] = true,
+          ["cmp.entry.get_documentation"] = true,
+        },
+      },
+      routes = {
+        {
+          filter = {
+            event = "msg_show",
+            any = {
+              { find = "%d+L, %d+B" },
+              { find = "; after #%d+" },
+              { find = "; before #%d+" },
+            },
+          },
+          view = "mini",
+        },
+      },
+      presets = {
+        bottom_search = true,
+        command_palette = true,
+        long_message_to_split = true,
+      },
+    },
+    -- stylua: ignore
+    keys = {
+      { "<leader>sn", "", desc = "+noice"},
+      { "<S-Enter>", function() require("noice").redirect(vim.fn.getcmdline()) end, mode = "c", desc = "Redirect Cmdline" },
+      { "<leader>snl", function() require("noice").cmd("last") end, desc = "Noice Last Message" },
+      { "<leader>snh", function() require("noice").cmd("history") end, desc = "Noice History" },
+      { "<leader>sna", function() require("noice").cmd("all") end, desc = "Noice All" },
+      { "<leader>snd", function() require("noice").cmd("dismiss") end, desc = "Dismiss All" },
+      { "<leader>snt", function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope/FzfLua)" },
+      { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
+      { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
+    },
+    config = function(_, opts)
+      -- HACK: noice shows messages from before it was enabled,
+      -- but this is not ideal when Lazy is installing plugins,
+      -- so clear the messages in this case.
+      if vim.o.filetype == "lazy" then
+        vim.cmd([[messages clear]])
+      end
+      require("noice").setup(opts)
+    end,
+  }, 
     {
         "https://github.com/windwp/nvim-autopairs",
         event = "InsertEnter",
@@ -541,4 +606,37 @@ return require("lazy").setup({
         opts = {},
     },
     -- }}}
+
+        {
+      
+      'mrcjkb/rustaceanvim',
+      version = '^5', -- Use the latest stable version
+      ft = { 'rust' },
+      config = function()
+        vim.g.rustaceanvim = {
+          server = {
+            on_attach = function(_, bufnr)
+              -- Keybinding to toggle inlay hints
+              vim.keymap.set('n', '<Leader>th', function()
+                vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+              end, { buffer = bufnr })
+            end,
+            settings = {
+              ['rust-analyzer'] = {
+                cargo = { allFeatures = true },
+                checkOnSave = { command = 'clippy' },
+                inlayHints = {
+                  enable = true,               -- Enable inlay hints
+                  typeHints = true,            -- Show type hints
+                  parameterHints = true,       -- Show parameter hints
+                  chainingHints = true,        -- Show hints for chained method calls
+                  closingBraceHints = true,    -- Show closing brace hints
+                  maxLength = 30,              -- Max length of the hints
+                },
+              },
+            },
+          },
+        }
+      end
+    },
 })
