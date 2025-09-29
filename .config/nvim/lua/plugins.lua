@@ -404,13 +404,15 @@ return require("lazy").setup({
 
     -- {{{ IntelliSense
     {
-        "https://github.com/Saghen/blink.cmp",
+
+        "https://github.com/Saghen/blink.cmp",      
         dependencies = {
             "https://github.com/neovim/nvim-lspconfig",
         },
         version = "1.*",
         event = "VeryLazy",
         config = function()
+            
             vim.lsp.enable({
                 "clangd",
                 "lua_ls",
@@ -418,9 +420,27 @@ return require("lazy").setup({
                 "pyright",
                 "rust_analyzer",
                 "asm_ls",
-                "ts_ls",
+                "sqlls",
             })
+            
+            vim.lsp.config("clangd", {})
 
+            vim.lsp.config("lua_ls", {})
+            
+            vim.lsp.config("bashls", {})
+      
+            vim.lsp.config("pyright", {})
+      
+            vim.lsp.config("ts_ls", {})
+      
+            vim.lsp.config("asm_ls", {})
+            
+            vim.lsp.config("dockerls", {})
+      
+            vim.lsp.config("sqlls", {})
+      
+            vim.lsp.config("java_ls", {})
+            
             vim.lsp.config("rust_analyzer", {
                 settings = {
                     ["rust-analyzer"] = {
@@ -434,7 +454,7 @@ return require("lazy").setup({
                     },
                 },
             })
-
+             
             require("blink.cmp").setup({
                 keymap = {
                     preset = "enter",
