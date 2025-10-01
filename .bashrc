@@ -36,3 +36,4 @@ eval "$(fzf --bash)"
 
 # Starship
 eval "$(starship init bash)"
+
