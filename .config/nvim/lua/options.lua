@@ -19,9 +19,9 @@ vim.cmd('filetype plugin on')
 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 
 -- Transparency
---vim.api.nvim_set_hl(0, "Normal", { bg = "None" })
---vim.api.nvim_set_hl(0, "NormalNC", { bg = "None" })
---vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "None" })
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "None" })
+-- vim.api.nvim_set_hl(0, "NormalNC", { bg = "None" })
+-- vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "None" })
 
 -- Visuals
 vim.opt.termguicolors = true
@@ -71,3 +71,5 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.opt.spelllang = "en_us"
     end,
 })
+
+vim.g.autoformat = false
