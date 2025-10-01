@@ -57,4 +57,10 @@ vim.keymap.set("n", "<leader>e", ":Neotree filesystem reveal right<CR>", {desc =
 vim.keymap.set("n", "<leader>e",":Neotree toggle right<CR>", { noremap = true, silent = true }) --close neotree
 
 
+-- Open terminal in a vertical split with Ctrl-`
+vim.keymap.set("n", "<C-`>", function()
+  vim.cmd("vsplit | term")
+end, { noremap = true, silent = true, desc = "Open vertical terminal" })
 
+-- Make <Esc> return to Normal mode in terminal
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
