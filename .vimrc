@@ -4,9 +4,9 @@ set number
 
 set autoindent
 
-set mouse=a
-
 colorscheme zaibatsu
+
+set mouse=a
 
 set cursorline
 :highlight Cursorline cterm=bold ctermbg=black
@@ -31,3 +31,5 @@ set t_Co=256
 endif
 
 set termguicolors
+
+

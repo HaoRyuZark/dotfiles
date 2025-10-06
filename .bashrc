@@ -31,6 +31,7 @@ export PS1="${CYAN}\u${RESET}@${BLUE}\h${RESET}:${MAGENTA}\w\$(parse_git_branch)
 # Aliases
 alias ll='ls -la --color=auto'
 alias gp='bash $HOME/Homo_Deus/Programming/Bash/gp.sh'
+alias mant='bash $HOME/Homo_Deus/Programming/Bash/upgrade.sh'
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
 
