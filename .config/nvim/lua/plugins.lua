@@ -454,18 +454,16 @@ return require("lazy").setup({
             vim.lsp.config("sqlls", {})
       
             vim.lsp.config("java_ls", {})
-            
-            vim.lsp.config("texlab", {})
-            
+                       
             vim.lsp.config("clangd", {})
             
             vim.lsp.enable({
                   "lua_ls",
+                  "texlab",
                   "clangd",
                   "bashls",
                   "pyright",
                   "asm_ls",
-                  "texlab",
                   "sqlls",
               })
               
