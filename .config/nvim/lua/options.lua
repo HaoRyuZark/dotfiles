@@ -65,7 +65,7 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 
 -- Spell Checker for Markdown, tex, text and env files
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "md", "env", "tex", "text" },
+    pattern = { "md", "env", "tex", "txt" },
     callback = function(opts)
         vim.opt.spell = true
         vim.opt.spelllang = "en_us"
