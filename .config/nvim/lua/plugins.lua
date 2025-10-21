@@ -637,5 +637,14 @@ return require("lazy").setup({
           },
         }
       end
-    }
+    }, 
+  {
+    'tpope/vim-dadbod'
+  }, 
+  {
+   'kristijanhusak/vim-dadbod-ui' 
+  },
+  {
+   'kristijanhusak/vim-dadbod-completion' 
+  }
 })

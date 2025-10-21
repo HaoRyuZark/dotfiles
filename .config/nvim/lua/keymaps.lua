@@ -21,9 +21,9 @@ vim.keymap.set("n", "<leader>Y", [["+Y]], opts)
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 -- Splits
-vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
+vim.keymap.set("n", "<C-/>", "<C-w>v", { desc = "Split window vertically" })
 -- split window vertically
-vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
+vim.keymap.set("n", "<C-->", "<C-w>s", { desc = "Split window horizontally" })
 -- split window horizontally
 vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
 -- close current split window
@@ -36,7 +36,8 @@ vim.keymap.set("n", "<leader>tn", "<cmd>tabn<CR>")     --go to next
 vim.keymap.set("n", "<leader>tp", "<cmd>tabp<CR>")     --go to pre
 vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>") --open current tab in new tab
 
-vim.keymap.set("n", "<leader>cd", vim.cmd.Ex, { desc = "Opens the netrw File Explorer"})
+-- Netrw
+vim.keymap.set("n", "<leader>cd", vim.cmd.Exp, { desc = "Opens the netrw File Explorer"})
 
 -- Lsp 
 vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, {buffer = 0, desc = 'Hover'})
@@ -53,13 +54,13 @@ vim.keymap.set("n", "<leader>fr", require("telescope.builtin").lsp_references, {
 
 
 -- Neo Tree 
-vim.keymap.set("n", "<leader>e", ":Neotree filesystem reveal right<CR>", {desc = 'Open/Close filesystem'}) --open neotree
-vim.keymap.set("n", "<leader>e",":Neotree toggle right<CR>", { noremap = true, silent = true }) --close neotree
+vim.keymap.set("n", "<C-b>", ":Neotree filesystem reveal right<CR>", {desc = 'Open/Close filesystem'}) --open neotree
+vim.keymap.set("n", "<C-b>",":Neotree toggle right<CR>", { noremap = true, silent = true }) --close neotree
 
 
 -- Open terminal in a vertical split with Ctrl-`
 vim.keymap.set("n", "<C-`>", function()
-  vim.cmd("vsplit | term")
+  vim.cmd("split | term")
 end, { noremap = true, silent = true, desc = "Open vertical terminal" })
 
 -- Make <Esc> return to Normal mode in terminal
