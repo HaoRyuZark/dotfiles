@@ -33,8 +33,8 @@ export MANPAGER="nvim +Man!"
 
 # Aliases
 alias ll='ls -la --color=auto'
-alias gp='bash $HOME/Homo_Deus/Programming/Bash/gp.sh'
-alias mant='bash $HOME/Homo_Deus/Programming/Bash/upgrade.sh'
+alias gp='bash $HOME/Homo_Deus/Programming/Bash/scripts/gp.sh'
+alias mant='bash $HOME/Homo_Deus/Programming/Bash/scripts/upgrade.sh'
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
