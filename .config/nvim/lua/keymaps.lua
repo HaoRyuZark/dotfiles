@@ -6,7 +6,6 @@ vim.g.maplocalleader = " "
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv'", { desc = "Moves lines down in visual mode"})
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv'", { desc = "Moves lines up in visual mode"})
 
-
  -- the how it be paste
 vim.keymap.set("x", "<leader>p", [["_dP]])
 
@@ -16,14 +15,13 @@ vim.keymap.set("v", "p", '"_dp', opts)
 -- Copies or Yank to system clipboard
 vim.keymap.set("n", "<leader>Y", [["+Y]], opts)
 
-
 --Stars new tmux session from in here
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 -- Splits
-vim.keymap.set("n", "<C-/>", "<C-w>v", { desc = "Split window vertically" })
+vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
 -- split window vertically
-vim.keymap.set("n", "<C-->", "<C-w>s", { desc = "Split window horizontally" })
+vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
 -- split window horizontally
 vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
 -- close current split window
@@ -59,7 +57,7 @@ vim.keymap.set("n", "<C-b>",":Neotree toggle right<CR>", { noremap = true, silen
 
 
 -- Open terminal in a vertical split with Ctrl-`
-vim.keymap.set("n", "<C-`>", function()
+vim.keymap.set("n", "<leader>ot", function()
   vim.cmd("split | term")
 end, { noremap = true, silent = true, desc = "Open vertical terminal" })
 
