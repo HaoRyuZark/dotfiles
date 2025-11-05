@@ -1,44 +1,25 @@
-#
-# ~/.bashrc
-#
+# .bashrc
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
 
-alias ls='ls --color=auto'
-alias grep='grep --color=auto'
-PS1='[\u@\h \W]\$ '
-. "$HOME/.cargo/env"
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
 
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
 
-# Custom colored Bash prompt with Git branch
-parse_git_branch() {
-  git branch 2>/dev/null | grep '*' | sed 's/* \(.*\)/ (\1)/'
-}
-
-# Colors
-RESET="\[\e[0m\]"
-RED="\[\e[31m\]"
-GREEN="\[\e[32m\]"
-YELLOW="\[\e[33m\]"
-BLUE="\[\e[34m\]"
-CYAN="\[\e[36m\]"
-MAGENTA="\[\e[35m\]"
-
-# Prompt Without Starship
-export PS1="${CYAN}\u${RESET}@${BLUE}\h${RESET}:${MAGENTA}\w\$(parse_git_branch)${RESET}\$: "
-
-# Neovim as man pages reader
-export MANPAGER="nvim +Man!"
-
-# Aliases
-alias ll='ls -la --color=auto'
-alias gp='bash $HOME/Homo_Deus/Programming/Bash/scripts/gp.sh'
-alias mant='bash $HOME/Homo_Deus/Programming/Bash/scripts/upgrade.sh'
-
-# Set up fzf key bindings and fuzzy completion
-eval "$(fzf --bash)"
-
-# Starship
-eval "$(starship init bash)"
-
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+    for rc in ~/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc

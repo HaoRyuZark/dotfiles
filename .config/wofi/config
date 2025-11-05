@@ -1,6 +1,0 @@
-mode=drun
-term=kitty
-location=top
-image_size=50  
-allow_images=true
-lines=8
