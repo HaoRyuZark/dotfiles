@@ -10,7 +10,7 @@ vim.opt.rtp:prepend(lazypath)
 
 return require("lazy").setup({
 
-    -- {{{ UI
+    --  UI
       {
         "goolord/alpha-nvim",
       dependencies = {"nvim-tree/nvim-web-devicons"},
@@ -93,7 +93,7 @@ return require("lazy").setup({
         })
         end
     },
-    -- }}}
+    --
 
     -- Latex 
    {
@@ -126,7 +126,7 @@ return require("lazy").setup({
       },
     },
 
-    -- {{{ Search
+    -- Search
     {
         "https://github.com/ibhagwan/fzf-lua",
         dependencies = {
@@ -179,9 +179,9 @@ return require("lazy").setup({
       },
     },
     { "https://github.com/MagicDuck/grug-far.nvim", lazy = true },
-    -- }}}
+    --
 
-    -- {{{ File manager
+    -- File manager
   {
     'stevearc/oil.nvim',
     ---@module 'oil'
@@ -425,9 +425,8 @@ return require("lazy").setup({
     end,
 
   },
-    -- }}}
 
-    -- {{{ IntelliSense
+    -- IntelliSense
     {
 
         "https://github.com/Saghen/blink.cmp",      
@@ -479,7 +478,8 @@ return require("lazy").setup({
             })
         end,
     },
-
+  
+    -- Treesitter: Syntax highlighting
     {
         "https://github.com/nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
@@ -509,6 +509,7 @@ return require("lazy").setup({
         end,
     },
     
+  -- Noice: Command Bar
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -539,6 +540,7 @@ return require("lazy").setup({
         long_message_to_split = true,
       },
     },
+    
     -- stylua: ignore
     keys = {
       { "<leader>sn", "", desc = "+noice"},
@@ -550,17 +552,19 @@ return require("lazy").setup({
       { "<leader>snt", function() require("noice").cmd("pick") end, desc = "Noice Picker (Telescope/FzfLua)" },
       { "<c-f>", function() if not require("noice.lsp").scroll(4) then return "<c-f>" end end, silent = true, expr = true, desc = "Scroll Forward", mode = {"i", "n", "s"} },
       { "<c-b>", function() if not require("noice.lsp").scroll(-4) then return "<c-b>" end end, silent = true, expr = true, desc = "Scroll Backward", mode = {"i", "n", "s"}},
-    },
-    config = function(_, opts)
-      -- HACK: noice shows messages from before it was enabled,
-      -- but this is not ideal when Lazy is installing plugins,
-      -- so clear the messages in this case.
-      if vim.o.filetype == "lazy" then
-        vim.cmd([[messages clear]])
-      end
-      require("noice").setup(opts)
-    end,
-  }, 
+      },
+      config = function(_, opts)
+        -- HACK: noice shows messages from before it was enabled,
+        -- but this is not ideal when Lazy is installing plugins,
+        -- so clear the messages in this case.
+        if vim.o.filetype == "lazy" then
+          vim.cmd([[messages clear]])
+        end
+        require("noice").setup(opts)
+      end,
+      
+    }, 
+    
     {
         "https://github.com/windwp/nvim-autopairs",
         event = "InsertEnter",
@@ -568,9 +572,8 @@ return require("lazy").setup({
             require("nvim-autopairs").setup()
         end,
     },
-    -- }}}
 
-    -- {{{ Git
+    -- Git
     { "https://github.com/tpope/vim-fugitive", cmd = "Git" },
 
     {
@@ -580,9 +583,8 @@ return require("lazy").setup({
             require("mini.diff").setup({})
         end,
     },
-    -- }}}
 
-    -- {{{ Miscellaneous
+    --Miscellaneous
     { "https://github.com/farmergreg/vim-lastplace", event = "BufReadPost" },
     { "https://github.com/echasnovski/mini.bufremove", lazy = true },
 
@@ -604,8 +606,9 @@ return require("lazy").setup({
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
         opts = {},
-    },
-    -- }}}
+    }, 
+
+  -- Rust 
     {
       
       'mrcjkb/rustaceanvim',
@@ -638,6 +641,8 @@ return require("lazy").setup({
         }
       end
     }, 
+  
+  -- Database Stuff
   {
     'tpope/vim-dadbod'
   }, 
