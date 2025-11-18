@@ -458,12 +458,12 @@ return require("lazy").setup({
             
             vim.lsp.enable({
                   "lua_ls",
-                  "texlab",
                   "clangd",
                   "bashls",
                   "pyright",
                   "asm_ls",
                   "sqlls",
+                  "texlab"
               })
               
             require("blink.cmp").setup({
