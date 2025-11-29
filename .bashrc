@@ -12,6 +12,7 @@ fi
 
 
 export PATH="$PATH:/home/miguel/.cargo/bin" 
+export EDITOR="/usr/bin/nvim" 
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
 # export SYSTEMD_PAGER=
