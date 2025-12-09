@@ -10,8 +10,6 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
-
-export PATH="$PATH:/home/miguel/.cargo/bin" 
 export EDITOR="/usr/bin/nvim" 
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
@@ -55,3 +53,4 @@ alias gp='bash $HOME/Homo_Deus/Programming/Bash/scripts/gp.sh'
 alias gkey='$HOME/Homo_Deus/Programming/Bash/scripts/store_key_binds.sh'
 alias gset='$HOME/Homo_Deus/Programming/Bash/scripts/store_gnome_settings.sh'
 
+. "$HOME/.cargo/env"
