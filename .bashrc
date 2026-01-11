@@ -54,3 +54,5 @@ alias gkey='$HOME/Homo_Deus/Programming/Bash/scripts/store_key_binds.sh'
 alias gset='$HOME/Homo_Deus/Programming/Bash/scripts/store_gnome_settings.sh'
 
 . "$HOME/.cargo/env"
+
+[ -f "/home/miguel/.ghcup/env" ] && . "/home/miguel/.ghcup/env" # ghcup-env
