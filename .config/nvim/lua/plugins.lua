@@ -10,7 +10,9 @@ vim.opt.rtp:prepend(lazypath)
 
 return require("lazy").setup({
 
-    --  UI
+-------------------------------------------------------------------------------------------------- 
+
+--  UI
       {
         "goolord/alpha-nvim",
       dependencies = {"nvim-tree/nvim-web-devicons"},
@@ -59,7 +61,12 @@ return require("lazy").setup({
         alpha.setup(dashboard.opts)
       end,
     },
-    { 
+
+-------------------------------------------------------------------------------------------------- 
+
+-- Colorscheme
+
+{ 
 
     "catppuccin/nvim",
     name = "catppuccin",
@@ -93,8 +100,9 @@ return require("lazy").setup({
         })
         end
     },
-    --
 
+
+-------------------------------------------------------------------------------------------------- 
     -- Latex 
    {
       "lervag/vimtex",
@@ -106,7 +114,9 @@ return require("lazy").setup({
       end
     },
     
-    -- Which Key
+-------------------------------------------------------------------------------------------------- 
+
+-- Which Key
     {
         "folke/which-key.nvim",
       event = "VeryLazy",
@@ -126,7 +136,8 @@ return require("lazy").setup({
       },
     },
 
-    -- Search
+-----------------------------------------------------------------------------------------
+    -- Search and Telescope
     {
         "https://github.com/ibhagwan/fzf-lua",
         dependencies = {
@@ -173,11 +184,15 @@ return require("lazy").setup({
          vim.keymap.set("n", "<C-p>", builtin.find_files, {  desc = 'Find files'})
          vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = 'Live grep'})
          vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = 'Old files'})
+         vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = 'Help tags'})
 
           require("telescope").load_extension("ui-select")
         end,
       },
     },
+
+-----------------------------------------------------------------------------------------
+
     { "https://github.com/MagicDuck/grug-far.nvim", lazy = true },
     --
 
@@ -426,8 +441,11 @@ return require("lazy").setup({
 
   },
 
-    -- IntelliSense
-    {
+-------------------------------------------------------------------------------------------------- 
+
+-- IntelliSense
+
+{
 
         "https://github.com/Saghen/blink.cmp",      
         dependencies = {
@@ -477,8 +495,9 @@ return require("lazy").setup({
                 },
             })
         end,
-    },
-  
+  },
+-------------------------------------------------------------------------------------------------- 
+
     -- Treesitter: Syntax highlighting
     {
         "https://github.com/nvim-treesitter/nvim-treesitter",
@@ -491,6 +510,8 @@ return require("lazy").setup({
                     "json",
                     "c",
                     "cpp",
+                    'prolog',
+                    'haskell',
                     "java", 
                     "python",
                     "rust",
@@ -509,7 +530,9 @@ return require("lazy").setup({
         end,
     },
     
-  -- Noice: Command Bar
+-------------------------------------------------------------------------------------------------- 
+
+-- Noice: Command Bar
   {
     "folke/noice.nvim",
     event = "VeryLazy",
@@ -573,7 +596,9 @@ return require("lazy").setup({
         end,
     },
 
-    -- Git
+-------------------------------------------------------------------------------------------------- 
+
+-- Git
     { "https://github.com/tpope/vim-fugitive", cmd = "Git" },
 
     {
@@ -584,7 +609,10 @@ return require("lazy").setup({
         end,
     },
 
-    --Miscellaneous
+-------------------------------------------------------------------------------------------------- 
+
+--Miscellaneous
+
     { "https://github.com/farmergreg/vim-lastplace", event = "BufReadPost" },
     { "https://github.com/echasnovski/mini.bufremove", lazy = true },
 
@@ -608,7 +636,9 @@ return require("lazy").setup({
         opts = {},
     }, 
 
-  -- Rust 
+-------------------------------------------------------------------------------------------------- 
+
+-- Rust 
     {
       
       'mrcjkb/rustaceanvim',
@@ -642,7 +672,9 @@ return require("lazy").setup({
       end
     }, 
   
-  -- Database Stuff
+-------------------------------------------------------------------------------------------------- 
+
+-- Database Stuff
   {
     'tpope/vim-dadbod'
   }, 
@@ -652,4 +684,7 @@ return require("lazy").setup({
   {
    'kristijanhusak/vim-dadbod-completion' 
   }
+
+-------------------------------------------------------------------------------------------------- 
+
 })

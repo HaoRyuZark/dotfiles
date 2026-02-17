@@ -1,14 +1,15 @@
 -- Spacing
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=4")
-vim.cmd("set softtabstop=4")
-vim.cmd("set shiftwidth=4")
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 
 -- Syntax highlighting
 vim.cmd("syntax enable")
 
 -- Row numbers
-vim.cmd("set number")
+vim.opt.number = true
+vim.opt.relativenumber = true
 
 vim.opt.fillchars:append {eob = " "}
 
@@ -18,20 +19,15 @@ vim.cmd('filetype plugin on')
 -- Inline hints
 vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 
--- Transparency
--- vim.api.nvim_set_hl(0, "Normal", { bg = "None" })
--- vim.api.nvim_set_hl(0, "NormalNC", { bg = "None" })
--- vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "None" })
-
 -- Visuals
 vim.opt.termguicolors = true
-vim.opt.showmatch = true 
+vim.opt.showmatch = true
 
 -- Search
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
-vim.opt.hlsearch = false 
+vim.opt.hlsearch = false
 
 -- Clipboard
 vim.opt.clipboard = "unnamedplus"

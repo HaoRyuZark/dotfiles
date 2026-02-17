@@ -6,24 +6,23 @@ vim.g.maplocalleader = " "
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv'", { desc = "Moves lines down in visual mode"})
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv'", { desc = "Moves lines up in visual mode"})
 
- -- the how it be paste
-vim.keymap.set("x", "<leader>p", [["_dP]])
-
 -- remember yanked
 vim.keymap.set("v", "p", '"_dp', opts)
-
--- Copies or Yank to system clipboard
-vim.keymap.set("n", "<leader>Y", [["+Y]], opts)
 
 --Stars new tmux session from in here
 vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 -- Splits
+
+-- Split vertically
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
--- split window vertically
-vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
+
 -- split window horizontally
-vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
+vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
+
+-- split windows equal size
+vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
+
 -- close current split window
 vim.keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
 
@@ -50,11 +49,9 @@ vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", {buffer = 0,
 vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {buffer = 0, desc ='Rename'})
 vim.keymap.set("n", "<leader>fr", require("telescope.builtin").lsp_references, {buffer = 0, desc = 'Get references' })
 
-
 -- Neo Tree 
 vim.keymap.set("n", "<C-b>", ":Neotree filesystem reveal right<CR>", {desc = 'Open/Close filesystem'}) --open neotree
 vim.keymap.set("n", "<C-b>",":Neotree toggle right<CR>", { noremap = true, silent = true }) --close neotree
-
 
 -- Open terminal in a vertical split with Ctrl-`
 vim.keymap.set("n", "<leader>ot", function()
