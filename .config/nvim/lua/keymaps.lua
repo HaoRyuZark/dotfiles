@@ -33,8 +33,9 @@ vim.keymap.set("n", "<leader>tn", "<cmd>tabn<CR>")     --go to next
 vim.keymap.set("n", "<leader>tp", "<cmd>tabp<CR>")     --go to pre
 vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>") --open current tab in new tab
 
--- Netrw
-vim.keymap.set("n", "<leader>cd", vim.cmd.Exp, { desc = "Opens the netrw File Explorer"})
+for i = 1, 9 do
+  vim.keymap.set("n", "<A-" .. i .. ">", i .. "gt", { noremap = true, silent = true })
+end
 
 -- Lsp 
 vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, {buffer = 0, desc = 'Hover'})
