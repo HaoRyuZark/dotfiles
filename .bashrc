@@ -28,6 +28,9 @@ unset rc
 # Neovim as man pages reader
 export MANPAGER="nvim +Man!"
 
+# starship
+eval "$(starship init bash)"
+
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
 

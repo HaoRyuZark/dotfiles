@@ -61,3 +61,5 @@ end, { noremap = true, silent = true, desc = "Open vertical terminal" })
 
 -- Make <Esc> return to Normal mode in terminal
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
+
+vim.keymap.set("n","<C-a>", "ggVG", {desc = "Select All"})
