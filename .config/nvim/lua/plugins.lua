@@ -177,8 +177,12 @@ return require("lazy").setup({
                 require("telescope.themes").get_dropdown({}),
               },
             },
+          find_files = {
+            hidden = true
+          }
           })
-          local builtin = require("telescope.builtin")
+
+        local builtin = require("telescope.builtin")
 
         
          vim.keymap.set("n", "<C-p>", builtin.find_files, {  desc = 'Find files'})
@@ -469,9 +473,7 @@ return require("lazy").setup({
             vim.lsp.config("dockerls", {})
       
             vim.lsp.config("sqlls", {})
-      
-            vim.lsp.config("java_ls", {})
-                       
+                           
             vim.lsp.config("clangd", {})
             
             vim.lsp.enable({
@@ -495,7 +497,7 @@ return require("lazy").setup({
                 },
             })
         end,
-  },
+  }, 
 -------------------------------------------------------------------------------------------------- 
 
     -- Treesitter: Syntax highlighting

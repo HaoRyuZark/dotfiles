@@ -5,20 +5,65 @@ settings-version=2
 brightness=0.59999999999999998
 sigma=30
 
+[blur-my-shell/coverflow-alt-tab]
+pipeline='pipeline_default'
+
 [blur-my-shell/dash-to-dock]
 blur=true
 brightness=0.59999999999999998
+pipeline='pipeline_default_rounded'
 sigma=30
 static-blur=true
 style-dash-to-dock=0
 
+[blur-my-shell/lockscreen]
+pipeline='pipeline_default'
+
+[blur-my-shell/overview]
+pipeline='pipeline_default'
+
 [blur-my-shell/panel]
 brightness=0.59999999999999998
+pipeline='pipeline_default'
 sigma=30
+
+[blur-my-shell/screenshot]
+pipeline='pipeline_default'
 
 [blur-my-shell/window-list]
 brightness=0.59999999999999998
 sigma=30
+
+[just-perfection]
+accent-color-icon=false
+accessibility-menu=true
+animation=1
+background-menu=true
+controls-manager-spacing-size=0
+dash=true
+dash-icon-size=0
+double-super-to-appgrid=true
+osd=true
+overlay-key=true
+panel=true
+panel-in-overview=true
+ripple-box=true
+search=true
+show-apps-button=true
+startup-status=1
+support-notifier-type=0
+theme=false
+window-demands-attention-focus=false
+window-picker-icon=true
+window-preview-caption=true
+window-preview-close-button=true
+workspace=true
+workspace-background-corner-size=0
+workspace-popup=true
+workspaces-in-app-grid=true
+
+[lockscreen-extension]
+hide-lockscreen-extension-button=true
 
 [space-bar/appearance]
 application-styles='.space-bar {\n  -natural-hpadding: 12px;\n}\n\n.space-bar-workspace-label.active {\n  margin: 0 4px;\n  background-color: rgba(255,255,255,0.3);\n  color: rgba(255,255,255,1);\n  border-color: rgba(0,0,0,0);\n  font-weight: 700;\n  border-radius: 4px;\n  border-width: 0px;\n  padding: 3px 8px;\n}\n\n.space-bar-workspace-label.inactive {\n  margin: 0 4px;\n  background-color: rgba(0,0,0,0);\n  color: rgba(255,255,255,1);\n  border-color: rgba(0,0,0,0);\n  font-weight: 700;\n  border-radius: 4px;\n  border-width: 0px;\n  padding: 3px 8px;\n}\n\n.space-bar-workspace-label.inactive.empty {\n  margin: 0 4px;\n  background-color: rgba(0,0,0,0);\n  color: rgba(255,255,255,0.5);\n  border-color: rgba(0,0,0,0);\n  font-weight: 700;\n  border-radius: 4px;\n  border-width: 0px;\n  padding: 3px 8px;\n}'
@@ -27,29 +72,55 @@ custom-styles-failed=false
 
 [space-bar/behavior]
 always-show-numbers=true
+enable-custom-label=false
+indicator-style='workspaces-bar'
 smart-workspace-names=false
 
 [space-bar/shortcuts]
+back-and-forth=false
 enable-activate-workspace-shortcuts=true
 enable-move-to-workspace-shortcuts=true
+open-menu=['<Super>F4']
 
 [space-bar/state]
 version=34
 
 [switcher]
+activate-by-key=uint32 0
 fade-enable=false
 font-size=uint32 24
 icon-size=uint32 24
-launcher-stats='{"com.mattjakeman.ExtensionManager.desktop":1}'
+launcher-stats='{"com.mattjakeman.ExtensionManager.desktop":24,"org.gnome.Settings.desktop":9,"brave-browser.desktop":80,"org.gnome.Nautilus.desktop":126,"code.desktop":114,"kitty.desktop":1,"org.gnome.TextEditor.desktop":1,"org.gnome.Software.desktop":7,"com.vscodium.codium.desktop":12,"com.visualstudio.code.desktop":1,"com.github.tchx84.Flatseal.desktop":5,"org.gnome.SystemMonitor.desktop":2,"gnome-keyboard-panel.desktop":1,"org.gnome.baobab.desktop":1,"org.kiwix.desktop.desktop":1}'
 max-width-percentage=uint32 80
 show-switcher=['<Super>d']
 workspace-indicator=false
 
 [tilingshell]
+cycle-layouts-backward=['<Shift>']
+edge-tiling-mode='default'
+enable-autotiling=false
+enable-move-keybindings=false
+focus-window-down=['<Super>j']
+focus-window-left=['<Super>h']
+focus-window-right=['<Super>l']
+focus-window-up=['<Super>k']
 last-version-name-installed='17.0'
-layouts-json='[{"id":"Layout 1","tiles":[{"x":0,"y":0,"width":0.22,"height":0.5,"groups":[1,2]},{"x":0,"y":0.5,"width":0.22,"height":0.5,"groups":[1,2]},{"x":0.22,"y":0,"width":0.56,"height":1,"groups":[2,3]},{"x":0.78,"y":0,"width":0.22,"height":0.5,"groups":[3,4]},{"x":0.78,"y":0.5,"width":0.22,"height":0.5,"groups":[3,4]}]},{"id":"Layout 2","tiles":[{"x":0,"y":0,"width":0.22,"height":1,"groups":[1]},{"x":0.22,"y":0,"width":0.56,"height":1,"groups":[1,2]},{"x":0.78,"y":0,"width":0.22,"height":1,"groups":[2]}]},{"id":"Layout 3","tiles":[{"x":0,"y":0,"width":0.33,"height":1,"groups":[1]},{"x":0.33,"y":0,"width":0.67,"height":1,"groups":[1]}]},{"id":"Layout 4","tiles":[{"x":0,"y":0,"width":0.67,"height":1,"groups":[1]},{"x":0.67,"y":0,"width":0.33,"height":1,"groups":[1]}]}]'
+layouts-json='[{"id":"Layout 1","tiles":[{"x":0,"y":0,"width":0.22,"height":0.5,"groups":[1,2]},{"x":0,"y":0.5,"width":0.22,"height":0.5,"groups":[1,2]},{"x":0.22,"y":0,"width":0.56,"height":1,"groups":[2,3]},{"x":0.78,"y":0,"width":0.22,"height":0.5,"groups":[3,4]},{"x":0.78,"y":0.5,"width":0.22,"height":0.5,"groups":[3,4]}]},{"id":"Layout 2","tiles":[{"x":0,"y":0,"width":0.22,"height":1,"groups":[1]},{"x":0.22,"y":0,"width":0.56,"height":1,"groups":[1,2]},{"x":0.78,"y":0,"width":0.22,"height":1,"groups":[2]}]},{"id":"Layout 3","tiles":[{"x":0,"y":0,"width":0.33,"height":1,"groups":[1]},{"x":0.33,"y":0,"width":0.67,"height":1,"groups":[1]}]},{"id":"Layout 4","tiles":[{"x":0,"y":0,"width":0.67,"height":1,"groups":[1]},{"x":0.67,"y":0,"width":0.33,"height":1,"groups":[1]}]},{"id":"9133200","tiles":[{"x":0,"y":0,"width":0.5,"height":1,"groups":[1]},{"x":0.5,"y":0,"width":0.49999999999999994,"height":1,"groups":[1]}]}]'
+move-window-down=['<Shift><Control>j']
+move-window-left=['<Shift><Super>h']
+move-window-right=['<Shift><Super>l']
+move-window-up=['<Shift><Control>k']
+outer-gaps=uint32 0
 overridden-settings='{}'
-selected-layouts=[['Layout 1'], ['Layout 1'], ['Layout 1'], ['Layout 1'], ['Layout 1'], ['Layout 1']]
+selected-layouts=[['9133200'], ['9133200'], ['9133200'], ['9133200'], ['9133200'], ['9133200']]
+snap-assistant-threshold=0
+span-window-all-tiles=['<Super>Up']
+tiling-system-deactivation-key=['-1']
+window-use-custom-border-color=false
 
 [user-theme]
 name=''
+
+[vitals]
+hot-sensors=['_memory_usage_', '_system_load_1m_', '_fan_thinkpad_fan1_', '_temperature_acpi_thermal zone_', '__network-rx_max__']
+show-battery=true
