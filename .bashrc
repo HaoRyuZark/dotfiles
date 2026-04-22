@@ -55,6 +55,7 @@ alias ll='ls -la --color=auto'
 alias gp='bash $HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/gp.sh'
 alias gkey='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/store_key_binds.sh'
 alias gset='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/store_gnome_settings.sh'
+alias nvimdiff='nvim -d'
 
 . "$HOME/.cargo/env"
 
