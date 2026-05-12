@@ -23,7 +23,7 @@ set $menu wofi --show drun
 set $file_explorer nautilus
 
 ### Output configuration
-output * bg ~/Pictures/flower_girl.png fill
+output * bg ~/Pictures/Wallpapers/flower_girl.png fill
 
 output eDP-1 resolution 1920x1080 position 1920,0
 
