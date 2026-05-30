@@ -70,7 +70,7 @@ return require("lazy").setup({
 
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 1000,
+    priority = 0,
 
       config = function()
         require('catppuccin').setup {
@@ -82,12 +82,26 @@ return require("lazy").setup({
       end,
 
       -- optionally set the colorscheme within lazy config
-      init = function()
-        vim.cmd("colorscheme catppuccin-mocha")
-      end
+      -- init = function()
+       --  vim.cmd("colorscheme catppuccin-mocha")
+      -- end
 
     },
-    {
+    
+
+  {
+      "scottmckendry/cyberdream.nvim",
+      lazy = false,
+      priority = 1000,
+       init = function()
+        vim.cmd("colorscheme cyberdream-light")
+      end
+
+
+  },
+
+
+  {
 
         'nvim-lualine/lualine.nvim',
         dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -95,13 +109,14 @@ return require("lazy").setup({
         config = function()
             require("lualine").setup({
             options = {
-                theme = "catppuccin-mocha",
+                theme = "auto",
             },
         })
         end
     },
 
 
+ 
 -------------------------------------------------------------------------------------------------- 
     -- Latex 
    {
@@ -476,6 +491,7 @@ return require("lazy").setup({
                            
             vim.lsp.config("clangd", {})
             
+          
             vim.lsp.enable({
                   "lua_ls",
                   "clangd",
@@ -520,6 +536,7 @@ return require("lazy").setup({
                     "bash",
                     "asm",
                     "typescript",
+                    "javascript",
                     "vimdoc",
                 },
                 highlight = {
