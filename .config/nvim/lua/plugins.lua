@@ -70,7 +70,7 @@ return require("lazy").setup({
 
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 0,
+    priority = 10,
 
       config = function()
         require('catppuccin').setup {
@@ -82,9 +82,9 @@ return require("lazy").setup({
       end,
 
       -- optionally set the colorscheme within lazy config
-      -- init = function()
-       --  vim.cmd("colorscheme catppuccin-mocha")
-      -- end
+      init = function()
+        vim.cmd("colorscheme catppuccin-mocha")
+      end
 
     },
     
@@ -92,10 +92,10 @@ return require("lazy").setup({
   {
       "scottmckendry/cyberdream.nvim",
       lazy = false,
-      priority = 1000,
-       init = function()
-        vim.cmd("colorscheme cyberdream-light")
-      end
+      priority = 0,
+      -- init = function()
+      --  vim.cmd("colorscheme cyberdream-light")
+      -- end
 
 
   },
@@ -200,7 +200,7 @@ return require("lazy").setup({
         local builtin = require("telescope.builtin")
 
         
-         vim.keymap.set("n", "<C-p>", builtin.find_files, {  desc = 'Find files'})
+         vim.keymap.set("n", "<C-p>", builtin.find_files, {desc = 'Find files'})
          vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = 'Live grep'})
          vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = 'Old files'})
          vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = 'Help tags'})
@@ -519,10 +519,11 @@ return require("lazy").setup({
     -- Treesitter: Syntax highlighting
     {
         "https://github.com/nvim-treesitter/nvim-treesitter",
+        branch = "main", -- necessary for nvim version after .12 > due to a complete rewrite of the API
         build = ":TSUpdate",
         event = "VeryLazy",
         config = function()
-            require("nvim-treesitter.configs").setup({
+            require("nvim-treesitter.config").setup({
                 ensure_installed = {
                     "nix",
                     "json",
@@ -538,6 +539,12 @@ return require("lazy").setup({
                     "typescript",
                     "javascript",
                     "vimdoc",
+                    "regex",
+                    "html", 
+                    "css", 
+                    "yaml",
+                    "markdown",
+                    "latex"
                 },
                 highlight = {
                     enable = true,
