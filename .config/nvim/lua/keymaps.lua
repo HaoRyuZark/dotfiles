@@ -9,10 +9,7 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv'", { desc = "Moves lines up in visual
 -- remember yanked
 vim.keymap.set("v", "p", '"_dp', opts)
 
---Stars new tmux session from in here
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
-
--- Splits
+--- Splits ------------------------------------------------------------
 
 -- Split vertically
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
@@ -20,19 +17,12 @@ vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }
 -- split window horizontally
 vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
 
--- split windows equal size
-vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
-
--- close current split window
-vim.keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
-
 -- tab stuff
-vim.keymap.set("n", "<leader>to", "<cmd>tabnew<CR>")   --open new tab
-vim.keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>") --close current tab
-vim.keymap.set("n", "<leader>tn", "<cmd>tabn<CR>")     --go to next
-vim.keymap.set("n", "<leader>tp", "<cmd>tabp<CR>")     --go to pre
-vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>") --open current tab in new tab
+vim.keymap.set("n", "<C-t>", "<cmd>tabnew %<CR>")   --open new tab
+vim.keymap.set("n", "<C-w>", "<cmd>tabclose<CR>") --close current tab
+vim.keymap.set("n", "<C-n>", "<cmd>tabn<CR>")     --go to next
 
+--- Setting tabs via Alt + number
 for i = 1, 9 do
   vim.keymap.set("n", "<A-" .. i .. ">", i .. "gt", { noremap = true, silent = true })
 end
@@ -62,4 +52,14 @@ end, { noremap = true, silent = true, desc = "Open vertical terminal" })
 -- Make <Esc> return to Normal mode in terminal
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
 
+-- Select All with Ctrl + a
 vim.keymap.set("n","<C-a>", "ggVG", {desc = "Select All"})
+
+--- Telescope 
+local builtin = require("telescope.builtin") 
+vim.keymap.set("n", "<C-p>", builtin.find_files, {desc = 'Find files'})
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = 'Live grep'})
+vim.keymap.set("n", "<leader>fo", builtin.buffers, { desc = 'Old files'})
+vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = 'Help tags'})
+
+

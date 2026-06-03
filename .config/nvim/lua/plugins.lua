@@ -47,7 +47,7 @@ return require("lazy").setup({
         }
 
         local function footer()
-        return "¡Viva Cristo Rey!"
+          return "¡Viva Cristo Rey!"
         end
 
         dashboard.section.footer.val = footer()
@@ -192,19 +192,35 @@ return require("lazy").setup({
                 require("telescope.themes").get_dropdown({}),
               },
             },
-          find_files = {
-            hidden = true
-          }
+            defaults = {
+              vimgrep_arguments = {
+                "rg",
+                "--color=never",
+                "--no-heading",
+                "--with-filename",
+                "--line-number",
+                "--column",
+                "--hidden",
+                "--follow",    -- follow symlinks
+                "--smart-case",
+                "--glob",
+                "!.git/",
+              },
+            },
+            pickers = {
+                find_files = {
+                    hidden = true, 
+                    find_command = {
+                      "fd",
+                      "--type", "f",
+                      "--hidden",
+                      "--follow",   -- follow symlinks
+                      "--exclude", 
+                      ".git",
+                },
+              },
+            },
           })
-
-        local builtin = require("telescope.builtin")
-
-        
-         vim.keymap.set("n", "<C-p>", builtin.find_files, {desc = 'Find files'})
-         vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = 'Live grep'})
-         vim.keymap.set("n", "<leader>fo", builtin.oldfiles, { desc = 'Old files'})
-         vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = 'Help tags'})
-
           require("telescope").load_extension("ui-select")
         end,
       },
