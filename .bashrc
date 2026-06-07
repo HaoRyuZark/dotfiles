@@ -56,6 +56,7 @@ alias gp='bash $HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/gp.sh
 alias gkey='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/store_key_binds.sh'
 alias gset='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/store_gnome_settings.sh'
 alias nvimdiff='nvim -d'
+alias define='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/dictionary.sh'
 
 . "$HOME/.cargo/env"
 

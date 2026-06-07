@@ -183,7 +183,6 @@ return require("lazy").setup({
       
       {
         "nvim-telescope/telescope.nvim",
-        tag = "0.1.8",
         dependencies = { "nvim-lua/plenary.nvim", },
         config = function()
           require("telescope").setup({
@@ -481,55 +480,100 @@ return require("lazy").setup({
 -- IntelliSense
 
 {
+    "https://github.com/Saghen/blink.cmp",
 
-        "https://github.com/Saghen/blink.cmp",      
-        dependencies = {
-            "https://github.com/neovim/nvim-lspconfig",
+    dependencies = {
+        "https://github.com/neovim/nvim-lspconfig",
+        "https://github.com/L3MON4D3/LuaSnip",
+        "https://github.com/rafamadriz/friendly-snippets",
+    },
+
+    opts = {
+        appearance = {
+            nerd_font_variant = "mono",
         },
-        version = "1.*",
-        event = "VeryLazy",
-        config = function()
-            
-    
-            vim.lsp.config("lua_ls", {})
-            
-            vim.lsp.config("bashls", {})
-      
-            vim.lsp.config("pyright", {})
-      
-            vim.lsp.config("ts_ls", {})
-      
-            vim.lsp.config("asm_ls", {})
-            
-            vim.lsp.config("dockerls", {})
-      
-            vim.lsp.config("sqlls", {})
-                           
-            vim.lsp.config("clangd", {})
-            
-          
-            vim.lsp.enable({
-                  "lua_ls",
-                  "clangd",
-                  "bashls",
-                  "pyright",
-                  "asm_ls",
-                  "sqlls",
-                  "texlab"
-              })
-              
-            require("blink.cmp").setup({
-                keymap = {
-                    preset = "enter",
-                },
-                cmdline = {
-                    keymap = {
-                        preset = "super-tab",
+
+        completion = {
+            documentation = { auto_show = true },
+        },
+
+        sources = {
+            default = { "lsp", "path", "snippets", "buffer", "luasnip" },
+        },
+    },
+
+    version = "1.*",
+    event = "VeryLazy",
+
+    config = function()
+
+        vim.lsp.config("lua_ls", {})
+        vim.lsp.config("bashls", {})
+        vim.lsp.config("pyright", {})
+        vim.lsp.config("ts_ls", {})
+        vim.lsp.config("asm_ls", {})
+        vim.lsp.config("dockerls", {})
+        vim.lsp.config("sqlls", {})
+        vim.lsp.config("clangd", {})
+
+        vim.lsp.config("texlab", {
+            settings = {
+                texlab = {
+                    -- optional: improves LaTeX completion relevance
+                    completion = {
+                        matcher = "prefix",
                     },
                 },
-            })
-        end,
-  }, 
+            },
+        })
+
+        vim.lsp.enable({
+            "lua_ls",
+            "clangd",
+            "bashls",
+            "pyright",
+            "asm_ls",
+            "sqlls",
+            "dockerls",
+            "texlab",
+        })
+
+        local ls = require("luasnip")
+
+        require("luasnip.loaders.from_vscode").lazy_load()
+
+        vim.keymap.set({ "i", "s" }, "<Tab>", function()
+            if ls.expand_or_jumpable() then
+                ls.expand_or_jump()
+            else
+                vim.api.nvim_feedkeys(
+                    vim.api.nvim_replace_termcodes("<Tab>", true, false, true),
+                    "n",
+                    false
+                )
+            end
+        end)
+
+        vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
+            if ls.jumpable(-1) then
+                ls.jump(-1)
+            end
+        end)
+
+        require("blink.cmp").setup({
+            keymap = {
+                preset = "enter",
+            },
+
+            cmdline = {
+                keymap = {
+                    preset = "super-tab",
+                },
+            },
+        })
+    end,
+},
+ 
 -------------------------------------------------------------------------------------------------- 
 
     -- Treesitter: Syntax highlighting

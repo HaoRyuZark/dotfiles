@@ -19,7 +19,7 @@ vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally"
 
 -- tab stuff
 vim.keymap.set("n", "<C-t>", "<cmd>tabnew %<CR>")   --open new tab
-vim.keymap.set("n", "<C-w>", "<cmd>tabclose<CR>") --close current tab
+vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<CR>") --close current tab
 vim.keymap.set("n", "<C-n>", "<cmd>tabn<CR>")     --go to next
 
 --- Setting tabs via Alt + number
