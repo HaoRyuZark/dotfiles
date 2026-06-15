@@ -14,6 +14,8 @@ vim.keymap.set("v", "p", '"_dp', opts)
 -- Split vertically
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
 
+vim.keymap.set("n", "<C-/>", "<C-w>v<C-w>l", { desc = "Split window vertically" })
+
 -- split window horizontally
 vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
 

@@ -57,6 +57,7 @@ alias gkey='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/store_ke
 alias gset='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/store_gnome_settings.sh'
 alias nvimdiff='nvim -d'
 alias define='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/dictionary.sh'
+alias audio='pavucontrol'
 
 . "$HOME/.cargo/env"
 
