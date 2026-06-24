@@ -58,7 +58,11 @@ alias gset='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/store_gn
 alias nvimdiff='nvim -d'
 alias define='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/dictionary.sh'
 alias audio='pavucontrol'
+alias homo='cd $HOME/Homo_Deus; tmux'
+
 
 . "$HOME/.cargo/env"
 
 [ -f "/home/miguel/.ghcup/env" ] && . "/home/miguel/.ghcup/env" # ghcup-env
+
+export PATH="$HOME/.cargo/bin:$PATH"

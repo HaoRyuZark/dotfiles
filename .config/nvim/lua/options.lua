@@ -69,3 +69,8 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.g.autoformat = false
+
+vim.api.nvim_set_hl(0, 'LineNrAbove', { fg='#51B3EC', bold=true })
+vim.api.nvim_set_hl(0, 'LineNr', { fg='#ea8648', bold=true })
+vim.api.nvim_set_hl(0, 'LineNrBelow', { fg='#ea8648', bold=true })
+
