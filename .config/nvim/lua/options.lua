@@ -86,3 +86,8 @@ vim.api.nvim_create_autocmd("FileType", {
 
 vim.g.autoformat = false
 
+vim.api.nvim_create_autocmd("BufEnter", {
+    callback = function()
+        vim.opt_local.formatoptions:remove({"c", "r", "o2"})
+    end,
+})
