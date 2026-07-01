@@ -1,25 +1,33 @@
--- Leader
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 -- Moving Lines in visual mode
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv'", { desc = "Moves lines down in visual mode"})
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv'", { desc = "Moves lines up in visual mode"})
+vim.keymap.set("v", ">", ">gv", {desc = "Indents the line"})
+vim.keymap.set("v", "<", "<gv", {desc = "Un-indents the line"})
 
--- remember yanked
-vim.keymap.set("v", "p", '"_dp', opts)
+-- Remember yanked after pasting
+vim.keymap.set("v", "p", '"_dp')
 
---- Splits ------------------------------------------------------------
+-- Clear search results
+vim.keymap.set("n", "<C-c>", ":nohl<CR>", {desc = "Clear search hl", silent = true})
 
--- Split vertically
-vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
+-- Format code 
+vim.keymap.set("n", "<S-A-f>", vim.lsp.buf.format)
 
-vim.keymap.set("n", "<C-/>", "<C-w>v<C-w>l", { desc = "Split window vertically" })
+-- Replace the word cursor is on globally
+vim.keymap.set("n", "<leader>sr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word cursor is on globally" })
 
--- split window horizontally
-vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
+-- Executes shell command from in here making file executable
+vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "makes file executable" })
 
--- tab stuff
+-- Copy filepath to the clipboard
+vim.keymap.set("n", "<leader>fp", function()
+    local filePath = vim.fn.expand("%:~")
+    vim.fn.setreg("+", filePath)
+    print("File path copied to clipboard: " .. filePath)
+end, { desc = "Copy file path to clipboard" })
+
+-- Tab stuff ----------------------------------------------------------
+
 vim.keymap.set("n", "<C-t>", "<cmd>tabnew %<CR>")   --open new tab
 vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<CR>") --close current tab
 vim.keymap.set("n", "<C-n>", "<cmd>tabn<CR>")     --go to next
@@ -29,17 +37,9 @@ for i = 1, 9 do
   vim.keymap.set("n", "<A-" .. i .. ">", i .. "gt", { noremap = true, silent = true })
 end
 
--- Lsp 
-vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, {buffer = 0, desc = 'Hover'})
-vim.keymap.set("n", "<leader>gD", vim.lsp.buf.definition, {buffer = 0, desc = 'Get definition'})
-vim.keymap.set("n", "<leader>gd", vim.lsp.buf.declaration, {buffer = 0, desc = 'Get declaration'})
-vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {buffer = 0, desc = 'Get references'})
-vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, {buffer = 0, desc = 'Get implemenation'})
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {buffer = 0, desc = 'Code action'})
-vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, {buffer = 0, desc ='Go to next'})
-vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, {buffer = 0, desc ='Go to previous'})
-vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", {buffer = 0, desc ='Get telescope diagnostics'})
-vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {buffer = 0, desc ='Rename'})
+-- LSP keymaps are set buffer-locally in lua/plugins/nvim-lsp.lua via LspAttach.
+-- See that file for the full list: gd, gD, gr, gI, K, <leader>rn, <leader>ca,
+-- <S-A-f>, ]d/[d, ]e/[e, <leader>e, <leader>q, <leader>ds, <leader>ws, <F2>, etc.
 vim.keymap.set("n", "<leader>fr", require("telescope.builtin").lsp_references, {buffer = 0, desc = 'Get references' })
 
 -- Neo Tree 
