@@ -48,7 +48,6 @@ case ":$PATH:" in
         ;;
 esac
 
-# <<< juliaup initialize <<<
 
 # Aliases
 alias ll='ls -la --color=auto'

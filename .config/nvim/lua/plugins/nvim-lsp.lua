@@ -251,7 +251,9 @@ return {
         
         group = vim.api.nvim_create_augroup('user-lsp-attach', { clear = true }),
         callback = function(event)
+         
           local bufnr = event.buf
+
           -- Small helper so we don't repeat { buffer = bufnr, desc = … } everywhere.
           local map = function(lhs, rhs, desc, mode)
             vim.keymap.set(mode or 'n', lhs, rhs, { buffer = bufnr, desc = 'LSP: ' .. desc })
@@ -260,13 +262,13 @@ return {
           -- ── Navigation ──────────────────────────────────────────────
           -- fzf-lua provides a preview picker when there are multiple results
           -- (e.g. multiple implementations), matching VSCode's peek behaviour.
-          map('gd',         function() require('fzf-lua').lsp_definitions()        end, 'Go to Definition')
-          map('gD',         function() require('fzf-lua').lsp_declarations()       end, 'Go to Declaration')
-          map('gr',         function() require('fzf-lua').lsp_references()         end, 'Go to References')
-          map('gI',         function() require('fzf-lua').lsp_implementations()    end, 'Go to Implementation')
-          map('<leader>D',  function() require('fzf-lua').lsp_typedefs()           end, 'Go to Type Definition')
-          map('<leader>ds', function() require('fzf-lua').lsp_document_symbols()  end, 'Document Symbols')
-          map('<leader>ws', function() require('fzf-lua').lsp_workspace_symbols() end, 'Workspace Symbols')
+          map('<leader>gd',         function() require('fzf-lua').lsp_definitions()        end, 'Go to Definition')
+          map('<leader>gD',         function() require('fzf-lua').lsp_declarations()       end, 'Go to Declaration')
+          map('<leader>gr',         function() require('fzf-lua').lsp_references()         end, 'Go to References')
+          map('<leader>gi',         function() require('fzf-lua').lsp_implementations()    end, 'Go to Implementation')
+          map('<leader>gt',  function() require('fzf-lua').lsp_typedefs()           end, 'Go to Type Definition')
+          map('<leader>gs', function() require('fzf-lua').lsp_document_symbols()  end, 'Document Symbols')
+          map('<leader>gws', function() require('fzf-lua').lsp_workspace_symbols() end, 'Workspace Symbols')
 
           -- ── Documentation ───────────────────────────────────────────
           -- K shows the hover popup (VSCode: Ctrl+K Ctrl+I).
@@ -304,9 +306,11 @@ return {
           map(']e', function() vim.diagnostic.jump { count =  1, severity = vim.diagnostic.severity.ERROR, float = true } end, 'Next Error')
           map('[e', function() vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR, float = true } end, 'Prev Error')
          
+         
           -- Float with the full diagnostic message for the current line.
           map('<leader>e', vim.diagnostic.open_float,  'Show Line Diagnostics')
          
+
           -- Populate the location list with all buffer diagnostics (:lopen).
           map('<leader>q', vim.diagnostic.setloclist, 'Diagnostics to Loclist')
 

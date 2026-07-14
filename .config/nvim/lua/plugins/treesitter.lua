@@ -28,7 +28,9 @@ return  {
                     "css",
                     "yaml",
                     "markdown",
-                    "latex"
+                    "latex",
+                    "http",
+                    "markdown_inline"
                 },
                 highlight = {
                     enable = true,
