@@ -1,6 +1,10 @@
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true}
 
+-- Display all keybinds
+map("n", "<leader>c",  "<cmd>WhichKey<CR>", { desc = "Show Non Leader Key Commands"})
+
+
 -- Resizing Splits
 
 map("n", "<C-D-Left>",  "<Cmd>vertical resize -2<CR>", opts)
@@ -26,7 +30,7 @@ map("n", "<C-c>", ":nohl<CR>", {desc = "Clear search hl", silent = true})
 map("n", "<S-A-f>", vim.lsp.buf.format)
 
 -- Replace the word cursor is on globally
-map("n", "<leader>sr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word cursor is on globally" })
+map("n", "<leader>rr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word cursor is on globally" })
 
 -- Executes shell command from in here making file executable
 map("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "makes file executable" })

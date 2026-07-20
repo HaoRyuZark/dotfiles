@@ -1,15 +1,7 @@
--- LSP configuration for Neovim 0.11+ (stable).
--- Uses the native vim.lsp.config / vim.lsp.enable API introduced in 0.11.
-
--- Mason handles server installation; mason-lspconfig bridges the two.
--- The neovim api handles the connection and calls to the lsp. 
-
--- Completion capabilities are sourced from blink.cmp (see blink-cmp.lua).
-
-
 return {
 
-  -- ── 1. Mason ────────────────────────────────────────────────────────────
+  -- Mason 
+
   -- Mason is the package manager that downloads and installs LSP servers,
   -- formatters and linters into a single isolated directory (~/.local/share/nvim/mason).
   {
@@ -17,11 +9,19 @@ return {
     -- build ensures binaries are relinked after mason updates itself
     build = ':MasonUpdate',
     opts = {
-      ui = { border = 'rounded' },
+      ui = {
+        border = 'rounded',
+        icons = {
+                package_installed = "✓",
+                package_pending = "➜",
+                package_uninstalled = "✗"
+        },
+      },
     },
   },
 
-  -- ── 2. mason-lspconfig ──────────────────────────────────────────────────
+  -- mason-lspconfig 
+
   -- Bridges Mason and Neovim's native LSP layer.
   -- With automatic_enable = true (Neovim 0.11+) it calls vim.lsp.enable()
   -- for every server that Mason has installed, so you never need to call
@@ -33,7 +33,8 @@ return {
     },
   },
 
-  -- ── 3. mason-tool-installer ──────────────────────────────────────────────
+  -- mason-tool-installer 
+
   -- Declaratively lists the servers and extra tools that should always be
   -- present.  Run :MasonToolsInstall to trigger a manual install pass.
   -- Server names here follow the lspconfig convention; mason-lspconfig
@@ -55,12 +56,15 @@ return {
         'jdtls',        -- Java (Eclipse JDT LS)
         'hls',          -- Haskell
         'stylua',       -- Lua formatter (used by conform.nvim / manual :lua vim.lsp.buf.format)
-        'rust_analyzer' -- Rust
+        'rust_analyzer',-- Rust
+        'julia-lsp',    -- Julia
+        'asm-lsp'       -- assembly
       },
     },
   },
 
-  -- ── 4. fidget (optional) ───────────────────────────────────────────────────────────
+  -- fidget (optional) 
+  
   -- Shows LSP initialisation progress in the bottom-right corner so you
   -- know when a server is still indexing and completions may be incomplete.
   {
@@ -68,7 +72,8 @@ return {
     opts = {},
   },
 
-  -- ── 5. nvim-lspconfig ───────────────────────────────────────────────────
+  -- nvim-lspconfig 
+
   -- Provides well-maintained default configurations for every known server.
   -- In Neovim 0.11+, these configs are registered as vim.lsp.config entries
   -- automatically when the plugin loads, so we only need to call
@@ -88,13 +93,13 @@ return {
     },
     config = function()
 
-      -- ── Capabilities ──────────────────────────────────────────────────
+      -- Capabilities       
       -- blink.cmp advertises richer completion capabilities to every server
       -- (e.g. LSP snippets, label details, insertReplaceEdit support).
       -- We merge them into every server config so completions work fully.
       local capabilities = require('blink.cmp').get_lsp_capabilities()
 
-      -- ── Per-server settings ────────────────────────────────────────────
+      -- Ser-server settings 
       -- Only servers that need non-default options are listed here.
       -- All of them still receive the merged capabilities.
       local servers = {
@@ -156,7 +161,7 @@ return {
             },
           },
         },
-  
+
         rust_analyzer = {
           settings = {
             ['rust-analyzer'] = {
@@ -227,6 +232,10 @@ return {
         -- workspace directory that jdtls requires — no extra config needed.
         jdtls = {},
 
+        julia_lsp = {filetypes = {'jl'}},
+
+        asm_lsp = {},
+
         -- Haskell: use fourmolu for formatting (change to 'ormolu' if preferred).
         hls = {
           filetypes = { 'haskell', 'lhaskell', 'cabal' },
@@ -239,19 +248,23 @@ return {
       -- Merge capabilities into each server's config and register it with
       -- Neovim's native LSP layer.  mason-lspconfig will then call
       -- vim.lsp.enable() for each server that Mason has installed.
+
       for name, config in pairs(servers) do
+
         config.capabilities = vim.tbl_deep_extend('force', {}, capabilities, config.capabilities or {})
         vim.lsp.config(name, config)
+
       end
 
-      -- ── Keymaps (buffer-local, set once per LspAttach) ────────────────
+      -- Keymaps (buffer-local, set once per LspAttach)
       -- All bindings are scoped to the buffer the server just attached to,
       -- so they won't leak into unrelated filetypes.
+      --
       vim.api.nvim_create_autocmd('LspAttach', {
-        
+
         group = vim.api.nvim_create_augroup('user-lsp-attach', { clear = true }),
+
         callback = function(event)
-         
           local bufnr = event.buf
 
           -- Small helper so we don't repeat { buffer = bufnr, desc = … } everywhere.
@@ -259,7 +272,7 @@ return {
             vim.keymap.set(mode or 'n', lhs, rhs, { buffer = bufnr, desc = 'LSP: ' .. desc })
           end
 
-          -- ── Navigation ──────────────────────────────────────────────
+          -- Navigation 
           -- fzf-lua provides a preview picker when there are multiple results
           -- (e.g. multiple implementations), matching VSCode's peek behaviour.
           map('<leader>gd',         function() require('fzf-lua').lsp_definitions()        end, 'Go to Definition')
@@ -270,26 +283,23 @@ return {
           map('<leader>gs', function() require('fzf-lua').lsp_document_symbols()  end, 'Document Symbols')
           map('<leader>gws', function() require('fzf-lua').lsp_workspace_symbols() end, 'Workspace Symbols')
 
-          -- ── Documentation ───────────────────────────────────────────
-          -- K shows the hover popup (VSCode: Ctrl+K Ctrl+I).
+          -- Documentation 
+          -- K shows the hover popup
           -- Press K a second time to jump into the float; then use j/k to
           -- scroll.  noice.nvim also maps <C-f>/<C-b> to scroll the float
           -- from normal/insert mode (see noice.lua).
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
           -- Signature help while typing function arguments
-          -- (VSCode: Ctrl+Shift+Space).  Available in insert mode only.
           map('<C-k>', vim.lsp.buf.signature_help, 'Signature Help', 'i')
 
-          -- ── Refactoring ──────────────────────────────────────────────
-          -- Rename across all files in the project (VSCode: F2).
+          -- Refactoring 
           map('<F2>',       vim.lsp.buf.rename,      'Rename Symbol')
           map('<leader>rn', vim.lsp.buf.rename,      'Rename Symbol')
 
           -- Code actions: quick-fixes, auto-imports, extract-function, etc.
-          -- Works in normal mode and visual mode (range code actions).
           -- VSCode equivalent: Ctrl+.
-          map('<leader>ca', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
+          map('<C-.>', vim.lsp.buf.code_action, 'Code Action', { 'n', 'x' })
 
           -- Format the current buffer via the LSP formatter.
           -- <S-A-f> mirrors VSCode's Shift+Alt+F.  The global mapping in
@@ -297,7 +307,7 @@ return {
           -- precedence when an LSP is active.
           map('<S-A-f>', function() vim.lsp.buf.format { async = true } end, 'Format Buffer')
 
-          -- ── Diagnostics ──────────────────────────────────────────────
+          -- Diagnostics 
           -- Jump forward/backward through all diagnostics (VSCode: F8 / Shift+F8).
           map(']d', function() vim.diagnostic.jump { count =  1, float = true } end, 'Next Diagnostic')
           map('[d', function() vim.diagnostic.jump { count = -1, float = true } end, 'Prev Diagnostic')
@@ -305,17 +315,21 @@ return {
           -- Jump only to error-level diagnostics (skip warnings/hints).
           map(']e', function() vim.diagnostic.jump { count =  1, severity = vim.diagnostic.severity.ERROR, float = true } end, 'Next Error')
           map('[e', function() vim.diagnostic.jump { count = -1, severity = vim.diagnostic.severity.ERROR, float = true } end, 'Prev Error')
-         
-         
+
+
           -- Float with the full diagnostic message for the current line.
           map('<leader>e', vim.diagnostic.open_float,  'Show Line Diagnostics')
-         
+
 
           -- Populate the location list with all buffer diagnostics (:lopen).
+          -- The location list is a buffer in which the diagnostics about errors, warnings, etc. are stored and 
+          -- allows for quick navigation between files.
           map('<leader>q', vim.diagnostic.setloclist, 'Diagnostics to Loclist')
 
-          -- ── Optional features (guarded by server support) ────────────
+          -- Optional features (guarded by server support)
+
           local client = vim.lsp.get_client_by_id(event.data.client_id)
+
           -- Compatibility shim: supports_method() changed its call convention
           -- between Neovim 0.10 (positional args) and 0.11 (method call).
           local function supports(method)
@@ -330,7 +344,7 @@ return {
           -- Only activated for servers that advertise textDocument/inlayHint.
           if supports(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-            map('<leader>th', function()
+            map('<leader>gT', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled { bufnr = bufnr }, { bufnr = bufnr })
             end, 'Toggle Inlay Hints')
           end
@@ -357,12 +371,10 @@ return {
         end,
       })
 
-      -- ── Diagnostics appearance ─────────────────────────────────────────
+      -- Diagnostics appearance 
       vim.diagnostic.config {
         severity_sort = true,
-        -- Rounded border on the floating diagnostic window.
         float = { border = 'rounded', source = 'if_many' },
-        -- Nerd Font icons in the sign column (gutter).
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -371,8 +383,6 @@ return {
             [vim.diagnostic.severity.HINT]  = '󰌶 ',
           },
         },
-        -- Virtual text inline next to the affected line.
-        -- source = 'if_many' hides the source name when only one LSP reports.
         virtual_text = {
           source  = 'if_many',
           spacing = 2,

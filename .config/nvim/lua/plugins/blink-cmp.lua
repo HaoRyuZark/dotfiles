@@ -1,13 +1,12 @@
--- Completion engine configuration.
--- blink can only ask to the engines for completion
 return {
+
   'saghen/blink.cmp',
   event   = 'InsertEnter',
   version = '1.*',
 
   dependencies = {
 
-    -- ── Snippet engine ───────────────────────────────────────────────
+    -- Snippet engine 
     -- LuaSnip expands LSP snippets (e.g. auto-filled function parameters)
     -- and loads the friendly-snippets collection.
     {
@@ -19,6 +18,7 @@ return {
         if vim.fn.has('win32') == 1 or vim.fn.executable('make') == 0 then return end
         return 'make install_jsregexp'
       end)(),
+
       dependencies = {
         -- A curated collection of snippets for many languages (Python, JS,
         -- Lua, HTML, CSS, Rust, Haskell, LaTeX, Bash …).
@@ -31,7 +31,7 @@ return {
       },
     },
 
-    -- ── Neovim API completion ────────────────────────────────────────
+    -- Neovim API completion 
     -- lazydev teaches the Lua LSP about Neovim's runtime types so you get
     -- accurate completion for vim.*, require('...'), and plugin APIs while
     -- editing your own config.
@@ -40,7 +40,7 @@ return {
 
   opts = {
 
-    -- ── Keymaps ────────────────────────────────────────────────────
+    -- Keymaps     
     -- The 'default' preset gives you:
     --   <C-n> / <C-p>   : select next / previous item
     --   <C-space>       : open menu or open docs if already open
@@ -96,7 +96,7 @@ return {
       },
     },
 
-    -- ── Sources ────────────────────────────────────────────────────
+    -- Sources 
     -- Completion candidates come from these sources in priority order.
     -- 'lazydev' replaces the standard 'lsp' source when editing Neovim Lua
     -- files so you get typed vim.* API completions.

@@ -1,12 +1,12 @@
 return  {
         "https://github.com/nvim-treesitter/nvim-treesitter",
+
         branch = "main", -- necessary for nvim version after .12 > due to a complete rewrite of the API
         build = ":TSUpdate",
         event = "VeryLazy",
-
-        config = function()
-            require("nvim-treesitter.config").setup({
-                ensure_installed = {
+        
+        opts = {
+            ensure_installed = {
                     "nix",
                     "json",
                     "c",
@@ -30,7 +30,9 @@ return  {
                     "markdown",
                     "latex",
                     "http",
-                    "markdown_inline"
+                    "markdown_inline",
+                    "vim",
+                    "php",
                 },
                 highlight = {
                     enable = true,
@@ -38,7 +40,7 @@ return  {
                 indent = {
                     enable = true,
                 },
-            })
-        end,
+                auto_install = true,
+        },
 }
  

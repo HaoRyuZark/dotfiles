@@ -6,20 +6,17 @@ return {
     config = function()
       local oil = require("oil")
       oil.setup({
-            
           default_file_explorer = true,
             columns = {
               "icon",
---              "permissions",
- --             "size",
- --             "mtime",
+--            "permissions",
+--            "size",
+--            "mtime",
             },
-            
             buf_options = {
               buflisted = false,
               bufhidden = "hide",
             },
-            
             win_options = {
               wrap = false,
               signcolumn = "no",
@@ -30,23 +27,17 @@ return {
               conceallevel = 3,
               concealcursor = "nvic",
             },
-            
             delete_to_trash = false,
-            
             skip_confirm_for_simple_edits = false,
             prompt_save_on_select_new_entry = true,
-            
             cleanup_delay_ms = 2000,
-            
             lsp_file_methods = {
               enabled = true,
               timeout_ms = 1000,
               autosave_changes = false,
             },
-            
             constrain_cursor = "editable",
             watch_for_changes = false,
-            
             keymaps = {
               ["g?"] = { "actions.show_help", mode = "n" },
               ["<CR>"] = "actions.select",
@@ -65,22 +56,17 @@ return {
               ["g."] = { "actions.toggle_hidden", mode = "n" },
               ["g\\"] = { "actions.toggle_trash", mode = "n" },
             },
-           
             use_default_keymaps = true,
             view_options = {
               show_hidden = true,
-              
               is_hidden_file = function(name, bufnr)
                 local m = name:match("^%.")
                 return m ~= nil
               end,
-             
               is_always_hidden = function(name, bufnr)
                 return false
               end,
-             
               natural_order = "fast",
-             
               case_insensitive = false,
               sort = {
                 { "type", "asc" },
@@ -91,7 +77,6 @@ return {
               end,
             },
             extra_scp_args = {},
-            
             float = {
               -- Padding around the floating window
               padding = 2,
@@ -112,7 +97,6 @@ return {
                 return conf
               end,
             },
-            
             -- Configuration for the file preview window
             preview_win = {
               -- Whether the preview window is automatically updated when the cursor is moved
@@ -149,7 +133,6 @@ return {
                 winblend = 0,
               },
             },
-           
             progress = {
               max_width = 0.9,
               min_width = { 40, 0.4 },

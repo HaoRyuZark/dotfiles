@@ -28,7 +28,6 @@ return  {
         long_message_to_split = true,
       },
     },
-    
     -- stylua: ignore
     keys = {
       { "<leader>sn", "", desc = "+noice"},
@@ -48,6 +47,4 @@ return  {
         end
         require("noice").setup(opts)
       end,
-      
-} 
-   
+}
