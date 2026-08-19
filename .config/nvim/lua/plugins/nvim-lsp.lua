@@ -57,7 +57,6 @@ return {
         'hls',          -- Haskell
         'stylua',       -- Lua formatter (used by conform.nvim / manual :lua vim.lsp.buf.format)
         'rust_analyzer',-- Rust
-        'julia-lsp',    -- Julia
         'asm-lsp'       -- assembly
       },
     },
