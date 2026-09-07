@@ -65,3 +65,7 @@ alias homo='cd $HOME/Homo_Deus; tmux'
 [ -f "/home/miguel/.ghcup/env" ] && . "/home/miguel/.ghcup/env" # ghcup-env
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
