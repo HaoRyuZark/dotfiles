@@ -1,0 +1,16 @@
+com.github.mgropp.PdfJumbler
+com.github.reds.LogisimEvolution
+com.github.tchx84.Flatseal
+com.jgraph.drawio.desktop
+com.mattjakeman.ExtensionManager
+com.rafaelmardojai.Blanket
+dev.geopjr.Archives
+dev.geopjr.Calligraphy
+io.dbeaver.DBeaverCommunity
+io.github.fizzyizzy05.binary
+no.bragefuglseth.Keypunch
+org.gnome.World.PikaBackup
+org.prismlauncher.PrismLauncher
+org.torproject.torbrowser-launcher
+org.zotero.Zotero
+se.sjoerd.Graphs
