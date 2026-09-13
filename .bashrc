@@ -29,7 +29,7 @@ unset rc
 export MANPAGER="nvim +Man!"
 
 # starship
-eval "$(starship init bash)"
+# eval "$(starship init bash)"
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
@@ -51,11 +51,8 @@ esac
 
 # Aliases
 alias ll='ls -la --color=auto'
-alias gp='bash $HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/gp.sh'
-alias gkey='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/store_key_binds.sh'
-alias gset='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/store_gnome_settings.sh'
+alias gp='bash $HOME/dotfiles/scripts/gp.sh'
 alias nvimdiff='nvim -d'
-alias define='$HOME/Homo_Deus/Programming/Script_Programming/Bash/scripts/dictionary.sh'
 alias audio='pavucontrol'
 alias homo='cd $HOME/Homo_Deus; tmux'
 

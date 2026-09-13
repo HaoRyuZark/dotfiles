@@ -38,12 +38,12 @@ output eDP-1 resolution 1920x1080 position 1920,0
 
 ### Gaps
 
-gaps inner 4px
-gaps outer 4px
+gaps inner 0px
+gaps outer 0px
 
 ### Borders
 default_border pixel 5px 
-default_floating_border pixel 5px 
+default_floating_border pixel 0px 
 
 #--telemagenta: #D1337B;
 #--vivid-sky-blue: #0ADAF8;
@@ -261,11 +261,11 @@ include /etc/sway/config.d/*
 ### Autostart
 
 # Polkit for security prompts
-#exec polkit-gnome-authentication-agent-1 
-exec lxqt-policykit-agent 
+exec lxqt-policy-kit-agent
 
 # Prompt for the wifi password
 exec nm-applet --indicator
+exec /usr/bin/gnome-keyring-daemon --start --components=secrets
 
 # Tiles beautifully
 exec_always autotiling -l 5
