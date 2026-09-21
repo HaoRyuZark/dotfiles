@@ -10,6 +10,9 @@ if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
     PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
 
+# User binaries
+export PATH="$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$HOME/.juliaup/bin:$PATH"
+
 export EDITOR="/usr/bin/nvim" 
 
 # Uncomment the following line if you don't like systemctl's auto-paging feature:
@@ -29,25 +32,10 @@ unset rc
 export MANPAGER="nvim +Man!"
 
 # starship
-# eval "$(starship init bash)"
+eval "$(starship init bash)"
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --bash)"
-
-
-# >>> juliaup initialize >>>
-
-# !! Contents within this block are managed by juliaup !!
-
-case ":$PATH:" in
-    *:/home/miguel/.juliaup/bin:*)
-        ;;
-
-    *)
-        export PATH=/home/miguel/.juliaup/bin${PATH:+:${PATH}}
-        ;;
-esac
-
 
 # Aliases
 alias ll='ls -la --color=auto'
@@ -56,13 +44,8 @@ alias nvimdiff='nvim -d'
 alias audio='pavucontrol'
 alias homo='cd $HOME/Homo_Deus; tmux'
 
+# Haskell Set-up
+# [ -f "/home/miguel/.ghcup/env" ] && . "/home/miguel/.ghcup/env" # ghcup-env
 
-. "$HOME/.cargo/env"
-
-[ -f "/home/miguel/.ghcup/env" ] && . "/home/miguel/.ghcup/env" # ghcup-env
-
-export PATH="$HOME/.cargo/bin:$PATH"
-
-
-# Load Angular CLI autocompletion.
-source <(ng completion script)
+# Load Angular CLI autocompletion. (Can cause slow startup)
+#source <(ng completion script)

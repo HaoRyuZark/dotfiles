@@ -4,6 +4,25 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+
+### Autostart
+
+# Polkit for security prompts
+exec /usr/share/lxqt/translations/lxqt-policykit-agent/lxqt-policykit-agent_id.en
+
+# Activate Notification Daemon 
+# exec dunst
+exec swaync
+
+# Activate Notification Daemon 
+exec dunst
+# Prompt for the wifi password
+exec nm-applet --indicator
+exec /usr/bin/gnome-keyring-daemon --start --components=secrets
+
+# Tiles beautifully
+exec_always autotiling -l 5
+
 ### Opacity
 for_window [title=".*"] opacity 1
 
@@ -30,7 +49,7 @@ set $file_explorer nautilus
 ### Output configuration
 
 # Background Image
-output * bg ~/Pictures/Wallpapers/flower_girl.png fill
+output * bg ~/Pictures/Wallpapers/vaporcore.png fill
 # We need to specify the resolution of our device to render the image right
 output eDP-1 resolution 1920x1080 position 1920,0
 
@@ -98,7 +117,7 @@ exec swayidle -w \
     bindsym $mod+Return exec $term
     
     # Launch File explorer
-    #bindsym $mod+e exec $file_explorer
+    bindsym $mod+e exec $file_explorer
 
     # Kill focused window
     bindsym $mod+q kill
@@ -181,9 +200,9 @@ exec swayidle -w \
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split 
+    #bindsym $mod+s layout stacking
+    #bindsym $mod+w layout tabbed
+    #bindsym $mod+e layout toggle split 
 
     #comment out for the file explorer if needed
 
@@ -248,6 +267,13 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
+
+# Random Wallpapers
+bindsym $mod+w exec ~/dotfiles/scripts/random-wallpaper.sh
+
+# Lock Screen
+bindsym $mod+c exec swaylock -f
+
 #
 # Status Bar:
 #
@@ -257,16 +283,4 @@ bar {
 }
 
 include /etc/sway/config.d/*
-
-### Autostart
-
-# Polkit for security prompts
-exec lxqt-policy-kit-agent
-
-# Prompt for the wifi password
-exec nm-applet --indicator
-exec /usr/bin/gnome-keyring-daemon --start --components=secrets
-
-# Tiles beautifully
-exec_always autotiling -l 5
 
