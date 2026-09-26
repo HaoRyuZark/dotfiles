@@ -49,3 +49,5 @@ alias homo='cd $HOME/Homo_Deus; tmux'
 
 # Load Angular CLI autocompletion. (Can cause slow startup)
 #source <(ng completion script)
+
+fastfetch 

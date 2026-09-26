@@ -14,8 +14,6 @@ exec /usr/share/lxqt/translations/lxqt-policykit-agent/lxqt-policykit-agent_id.e
 # exec dunst
 exec swaync
 
-# Activate Notification Daemon 
-exec dunst
 # Prompt for the wifi password
 exec nm-applet --indicator
 exec /usr/bin/gnome-keyring-daemon --start --components=secrets
