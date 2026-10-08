@@ -4,7 +4,6 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-
 ### Autostart
 
 # Polkit for security prompts
@@ -43,6 +42,7 @@ set $menu wofi --show drun
 
 # File explorer
 set $file_explorer nautilus
+set $browser brave-browser
 
 ### Output configuration
 
@@ -116,6 +116,9 @@ exec swayidle -w \
     
     # Launch File explorer
     bindsym $mod+e exec $file_explorer
+    
+    # Launch Browser 
+    bindsym $mod+b exec $browser
 
     # Kill focused window
     bindsym $mod+q kill
@@ -194,7 +197,7 @@ exec swayidle -w \
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
+    #bindsym $mod+b splith
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles

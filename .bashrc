@@ -15,9 +15,6 @@ export PATH="$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$HOME/.juliaup/bin:$PAT
 
 export EDITOR="/usr/bin/nvim" 
 
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
-# export SYSTEMD_PAGER=
-
 # User specific aliases and functions
 if [ -d ~/.bashrc.d ]; then
     for rc in ~/.bashrc.d/*; do
@@ -35,7 +32,7 @@ export MANPAGER="nvim +Man!"
 eval "$(starship init bash)"
 
 # Set up fzf key bindings and fuzzy completion
-eval "$(fzf --bash)"
+# eval "$(fzf --bash)"
 
 # Aliases
 alias ll='ls -la --color=auto'
@@ -50,4 +47,4 @@ alias homo='cd $HOME/Homo_Deus; tmux'
 # Load Angular CLI autocompletion. (Can cause slow startup)
 #source <(ng completion script)
 
-fastfetch 
+# fastfetch 

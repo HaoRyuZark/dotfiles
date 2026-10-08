@@ -19,4 +19,10 @@ return {
     },
   },
   -- To set upt run: CopilotChat setup
+  {
+    "github/copilot.vim",
+  },
+  -- To set upt run: Copilot setup
+  -- :Copilot disable        Globally disable GitHub Copilot inline suggestions.
+  -- :Copilot enable         Re-enable GitHub Copilot after :Copilot disable.
 }
