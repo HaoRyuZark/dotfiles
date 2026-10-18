@@ -26,7 +26,7 @@ PATHS=(
 if [[ "$MODE" == "push" ]]; then
     echo "Pushing all repositories"
     read -p "Enter a commit message: " MESSAGE
-    DATE="$(date)"
+    DATE="$(date): Backup"
 
     for path in "${PATHS[@]}"; do
         cd "$path"
