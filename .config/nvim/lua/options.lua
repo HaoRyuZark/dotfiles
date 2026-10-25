@@ -1,61 +1,72 @@
--- Spacing
-vim.cmd("set expandtab")
-vim.cmd("set tabstop=4")
-vim.cmd("set softtabstop=4")
-vim.cmd("set shiftwidth=4")
+-- Leader
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
--- Syntax highlighting
-vim.cmd("syntax enable")
+-- Spacing
+vim.opt.expandtab = true
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
 
 -- Row numbers
-vim.cmd("set number")
-
-vim.opt.fillchars:append {eob = " "}
-
--- File type recognition
-vim.cmd('filetype plugin on')
-
--- Inline hints
-vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-
--- Transparency
--- vim.api.nvim_set_hl(0, "Normal", { bg = "None" })
--- vim.api.nvim_set_hl(0, "NormalNC", { bg = "None" })
--- vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "None" })
-
--- Visuals
-vim.opt.termguicolors = true
-vim.opt.showmatch = true 
-
--- Search
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.incsearch = true
-vim.opt.hlsearch = false 
-
--- Clipboard
-vim.opt.clipboard = "unnamedplus"
-
--- Mouse Support
-vim.opt.mouse = "a"
-
--- Lines visible below the cursor 
-vim.opt.scrolloff = 10
-
--- gets rid of line with white spaces
-vim.g.editorconfig = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#51B3EC", bold = true })
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#ea8648", bold = true })
+vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#ea8648", bold = true })
 
 -- Auto indent
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.wrap = false
 
+-- Swaps Backupds and Undo
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undofile = true
+
+-- Search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+vim.opt.incsearch = true
+vim.opt.hlsearch = true
+
+-- Mouse Support
+vim.opt.mouse = "a"
+
+-- Clipboard
+vim.opt.clipboard = "unnamedplus"
+
+-- Visuals
+vim.opt.termguicolors = true
+vim.opt.showmatch = true
+vim.opt.background = "dark"
+vim.opt.scrolloff = 10 -- Lines visible below the cursor
+vim.opt.signcolumn = "yes" -- keeps signcolumn on
+
+-- Show substitutions on a split view
+vim.opt.inccommand = "split"
+
+-- SHow cursor line
+vim.opt.cursorline = true
+
+vim.opt.confirm = true
+
+-- Uniform configuration
+vim.g.editorconfig = true
+
+-- Syntax highlighting
+vim.cmd("syntax enable")
+vim.opt.fillchars:append({ eob = " " })
+
+-- File type recognition
+vim.cmd("filetype plugin on")
+
 -- Cursor
 vim.opt.concealcursor = ""
 
-vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'}
-vim.opt.shortmess = vim.opt.shortmess + { c = true}
-vim.api.nvim_set_option('updatetime', 300)
+vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
+vim.opt.shortmess = vim.opt.shortmess + { c = true }
 
 -- Show diagnostics
 vim.cmd([[
@@ -65,11 +76,17 @@ autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
 
 -- Spell Checker for Markdown, tex, text and env files
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = { "md", "env", "tex", "txt" },
-    callback = function(opts)
-        vim.opt.spell = true
-        vim.opt.spelllang = "en_us"
-    end,
+	pattern = { "markdown", "text", "tex" },
+	callback = function()
+		vim.opt.spell = true
+		vim.opt.spelllang = "en_us"
+	end,
 })
 
 vim.g.autoformat = false
+
+vim.api.nvim_create_autocmd("BufEnter", {
+	callback = function()
+		vim.opt_local.formatoptions:remove({ "c", "r", "o2" })
+	end,
+})

@@ -1,0 +1,11 @@
+space-bar@luchrioh
+blur-my-shell@aunetx
+Vitals@CoreCoding.com
+tactile@lundal.io
+user-theme@gnome-shell-extensions.gcampax.github.com
+switcher@landau.fi
+apps-menu@gnome-shell-extensions.gcampax.github.com
+background-logo@fedorahosted.org
+launch-new-instance@gnome-shell-extensions.gcampax.github.com
+places-menu@gnome-shell-extensions.gcampax.github.com
+window-list@gnome-shell-extensions.gcampax.github.com

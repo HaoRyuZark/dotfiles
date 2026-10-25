@@ -4,38 +4,63 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+### Autostart
+
+# Polkit for security prompts
+exec /usr/share/lxqt/translations/lxqt-policykit-agent/lxqt-policykit-agent_id.en
+
+# Activate Notification Daemon 
+# exec dunst
+exec swaync
+
+# Prompt for the wifi password
+exec nm-applet --indicator
+exec /usr/bin/gnome-keyring-daemon --start --components=secrets
+
+# Tiles beautifully
+exec_always autotiling -l 5
+
+### Opacity
+for_window [title=".*"] opacity 1
+
 ### Variables
-#
-# Logo key. Use Mod1 for Alt.
+
+# Logo key (Windows Key). Use Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
+
 # Your preferred terminal emulator
 set $term kitty
+
 # Your preferred application launcher
 set $menu wofi --show drun
 
 # File explorer
 set $file_explorer nautilus
+set $browser brave-browser
 
 ### Output configuration
-output * bg ~/Pictures/wallhaven-y8wm8g.png fill
 
+# Background Image
+output * bg ~/Pictures/Wallpapers/vaporcore.png fill
+# We need to specify the resolution of our device to render the image right
 output eDP-1 resolution 1920x1080 position 1920,0
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Gaps
 
-gaps inner 4px
-gaps outer 4px
+gaps inner 0px
+gaps outer 0px
 
 ### Borders
 default_border pixel 5px 
-default_floating_border pixel 5px 
+default_floating_border pixel 0px 
 
 #--telemagenta: #D1337B;
 #--vivid-sky-blue: #0ADAF8;
@@ -90,7 +115,10 @@ exec swayidle -w \
     bindsym $mod+Return exec $term
     
     # Launch File explorer
-    #bindsym $mod+e exec $file_explorer
+    bindsym $mod+e exec $file_explorer
+    
+    # Launch Browser 
+    bindsym $mod+b exec $browser
 
     # Kill focused window
     bindsym $mod+q kill
@@ -118,6 +146,7 @@ exec swayidle -w \
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
     bindsym $mod+$right focus right
+    
     # Or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
@@ -148,6 +177,7 @@ exec swayidle -w \
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
+    
     # Move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
@@ -167,13 +197,13 @@ exec swayidle -w \
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
+    #bindsym $mod+b splith
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split 
+    #bindsym $mod+s layout stacking
+    #bindsym $mod+w layout tabbed
+    #bindsym $mod+e layout toggle split 
 
     #comment out for the file explorer if needed
 
@@ -238,6 +268,13 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
+
+# Random Wallpapers
+bindsym $mod+w exec ~/dotfiles/scripts/random-wallpaper.sh
+
+# Lock Screen
+bindsym $mod+c exec swaylock -f
+
 #
 # Status Bar:
 #
@@ -247,9 +284,4 @@ bar {
 }
 
 include /etc/sway/config.d/*
-
-### Autostart
-
-exec_always autotiling -l 5
-
 

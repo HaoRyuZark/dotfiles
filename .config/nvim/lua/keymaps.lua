@@ -1,65 +1,87 @@
--- Leader
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
+
+-- Display all keybinds
+map("n", "<leader>c", "<cmd>WhichKey<CR>", { desc = "Show Non Leader Key Commands" })
+
+-- Resizing Splits
+
+map("n", "<C-D-Left>", "<Cmd>vertical resize -2<CR>", opts)
+map("n", "<C-D-Right>", "<Cmd>vertical resize +2<CR>", opts)
+map("n", "<C-\\>", "<Cmd>vsplit<CR>", opts)
+map("n", "<C-s>", "<Cmd>split<CR>", opts)
+
+-- Resize horizontal splits
+map("n", "<C-D-Up>", "<Cmd>resize +2<CR>", opts)
+map("n", "<C-D-Down>", "<Cmd>resize -2<CR>", opts)
 
 -- Moving Lines in visual mode
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv'", { desc = "Moves lines down in visual mode"})
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv'", { desc = "Moves lines up in visual mode"})
+map("v", "J", ":m '>+1<CR>gv=gv'", { desc = "Moves lines down in visual mode" })
+map("v", "K", ":m '<-2<CR>gv=gv'", { desc = "Moves lines up in visual mode" })
+map("v", ">", ">gv", { desc = "Indents the line" })
+map("v", "<", "<gv", { desc = "Un-indents the line" })
 
- -- the how it be paste
-vim.keymap.set("x", "<leader>p", [["_dP]])
+-- Remember yanked after pasting
+map("v", "p", '"_dp')
 
--- remember yanked
-vim.keymap.set("v", "p", '"_dp', opts)
+-- Clear search results
+map("n", "<C-c>", ":nohl<CR>", { desc = "Clear search hl", silent = true })
 
--- Copies or Yank to system clipboard
-vim.keymap.set("n", "<leader>Y", [["+Y]], opts)
+-- Format code
+map("n", "<S-A-f>", vim.lsp.buf.format)
 
---Stars new tmux session from in here
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+-- Replace the word cursor is on globally
+map(
+	"n",
+	"<leader>rr",
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	{ desc = "Replace word cursor is on globally" }
+)
 
--- Splits
-vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" })
--- split window vertically
-vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" })
--- split window horizontally
-vim.keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" }) -- make split windows equal width & height
--- close current split window
-vim.keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
+-- Executes shell command from in here making file executable
+map("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true, desc = "makes file executable" })
 
--- tab stuff
-vim.keymap.set("n", "<leader>to", "<cmd>tabnew<CR>")   --open new tab
-vim.keymap.set("n", "<leader>tx", "<cmd>tabclose<CR>") --close current tab
-vim.keymap.set("n", "<leader>tn", "<cmd>tabn<CR>")     --go to next
-vim.keymap.set("n", "<leader>tp", "<cmd>tabp<CR>")     --go to pre
-vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>") --open current tab in new tab
+-- Copy filepath to the clipboard
+map("n", "<leader>fp", function()
+	local filePath = vim.fn.expand("%:~")
+	vim.fn.setreg("+", filePath)
+	print("File path copied to clipboard: " .. filePath)
+end, { desc = "Copy file path to clipboard" })
 
--- Netrw
-vim.keymap.set("n", "<leader>cd", vim.cmd.Exp, { desc = "Opens the netrw File Explorer"})
+-- Tab stuff ----------------------------------------------------------
 
--- Lsp 
-vim.keymap.set("n", "<leader>K", vim.lsp.buf.hover, {buffer = 0, desc = 'Hover'})
-vim.keymap.set("n", "<leader>gD", vim.lsp.buf.definition, {buffer = 0, desc = 'Get definition'})
-vim.keymap.set("n", "<leader>gd", vim.lsp.buf.declaration, {buffer = 0, desc = 'Get declaration'})
-vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {buffer = 0, desc = 'Get references'})
-vim.keymap.set("n", "<leader>gi", vim.lsp.buf.implementation, {buffer = 0, desc = 'Get implemenation'})
-vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {buffer = 0, desc = 'Code action'})
-vim.keymap.set("n", "<leader>df", vim.diagnostic.goto_next, {buffer = 0, desc ='Go to next'})
-vim.keymap.set("n", "<leader>dp", vim.diagnostic.goto_prev, {buffer = 0, desc ='Go to previous'})
-vim.keymap.set("n", "<leader>dl", "<cmd>Telescope diagnostics<cr>", {buffer = 0, desc ='Get telescope diagnostics'})
-vim.keymap.set("n", "<leader>r", vim.lsp.buf.rename, {buffer = 0, desc ='Rename'})
-vim.keymap.set("n", "<leader>fr", require("telescope.builtin").lsp_references, {buffer = 0, desc = 'Get references' })
+map("n", "<C-t>", "<cmd>tabnew %<CR>") --open new tab
+map("n", "<leader>tc", "<cmd>tabclose<CR>") --close current tab
+map("n", "<C-n>", "<cmd>tabn<CR>") --go to next
 
+--- Setting tabs via Alt + number
+for i = 1, 9 do
+	map("n", "<A-" .. i .. ">", i .. "gt", { noremap = true, silent = true })
+end
 
--- Neo Tree 
-vim.keymap.set("n", "<C-b>", ":Neotree filesystem reveal right<CR>", {desc = 'Open/Close filesystem'}) --open neotree
-vim.keymap.set("n", "<C-b>",":Neotree toggle right<CR>", { noremap = true, silent = true }) --close neotree
+-- LSP keymaps are set buffer-locally in lua/plugins/nvim-lsp.lua via LspAttach.
+-- See that file for the full list: gd, gD, gr, gI, K, <leader>rn, <leader>ca,
+-- <S-A-f>, ]d/[d, ]e/[e, <leader>e, <leader>q, <leader>ds, <leader>ws, <F2>, etc.
+map("n", "<leader>fr", require("telescope.builtin").lsp_references, { buffer = 0, desc = "Get references" })
 
+-- Neo Tree
+map("n", "<C-S-e>", ":Neotree toggle right<CR>", { noremap = true, silent = true, desc = "Toggle Neotree (right)" }) --toggle neotree on the right
 
 -- Open terminal in a vertical split with Ctrl-`
-vim.keymap.set("n", "<leader>ot", function()
-  vim.cmd("split | term")
-end, { noremap = true, silent = true, desc = "Open vertical terminal" })
+map("n", "<C-`>", function()
+	vim.cmd("split | term ")
+	vim.cmd("startinsert")
+end, { noremap = true, silent = true, desc = "Open horizontal terminal" })
 
 -- Make <Esc> return to Normal mode in terminal
-vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
+map("t", "<Esc>", [[<C-\><C-n>]], { noremap = true, silent = true })
+
+-- Select All with Ctrl + a
+map("n", "<C-a>", "ggVG", { desc = "Select All" })
+
+--- Telescope
+local builtin = require("telescope.builtin")
+map("n", "<C-p>", builtin.find_files, { desc = "Find files" })
+map("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
+map("n", "<leader>fo", builtin.buffers, { desc = "Old files" })
+map("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
