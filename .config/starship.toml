@@ -1,280 +1,296 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-[aws]
-format = '\[[$symbol($profile)(\($region\))(\[$duration\])]($style)\]'
+# ============================================================
+# Vaporwave palette
+# ============================================================
 
-[azure]
-format = '\[[$symbol($subscription)]($style)\]'
+palette = 'vaporwave'
 
-[battery]
-format = '\[[$symbol$percentage]($style)\]'
+[palettes.vaporwave]
+void = '#050816'
+blue = '#071DFF'
+magenta = '#FF29E8'
+cyan = '#00F5FF'
+violet = '#8B5CFF'
+white = '#F7F4FF'
+muted = '#8290B5'
+green = '#70F5B5'
 
-[buf]
-format = '\[[$symbol($version)]($style)\]'
+# ============================================================
+# Main prompt
+# ============================================================
 
-[bun]
-format = '\[[$symbol($version)]($style)\]'
+format = """
+$directory\
+$git_branch\
+$git_status\
+$cmd_duration\
+$line_break\
+$character"""
 
-[c]
-format = '\[[$symbol($version(-$name))]($style)\]'
+# ============================================================
+# Directory
+# ============================================================
 
-[cmake]
-format = '\[[$symbol($version)]($style)\]'
+[directory]
+style = 'bold cyan'
+truncation_length = 3
+truncation_symbol = '…/'
+read_only = ' '
+read_only_style = 'bold magenta'
 
-[cmd_duration]
-format = '\[[⏱ $duration]($style)\]'
-
-[cobol]
-format = '\[[$symbol($version)]($style)\]'
-
-[conda]
-format = '\[[$symbol$environment]($style)\]'
-
-[container]
-format = '\[[$symbol \[$name\]]($style)\]'
-
-[cpp]
-format = '\[[$symbol($version(-$name))]($style)\]'
-
-[crystal]
-format = '\[[$symbol($version)]($style)\]'
-
-[daml]
-format = '\[[$symbol($version)]($style)\]'
-
-[dart]
-format = '\[[$symbol($version)]($style)\]'
-
-[deno]
-format = '\[[$symbol($version)]($style)\]'
-
-[direnv]
-format = '\[[$symbol$loaded/$allowed]($style)\]'
-
-[docker_context]
-format = '\[[$symbol$context]($style)\]'
-
-[dotnet]
-format = '\[[$symbol($version)(🎯 $tfm)]($style)\]'
-
-[elixir]
-format = '\[[$symbol($version \(OTP $otp_version\))]($style)\]'
-
-[elm]
-format = '\[[$symbol($version)]($style)\]'
-
-[erlang]
-format = '\[[$symbol($version)]($style)\]'
-
-[fennel]
-format = '\[[$symbol($version)]($style)\]'
-
-[fortran]
-format = '\[[$symbol($version)]($style)\]'
-
-[fossil_branch]
-format = '\[[$symbol$branch]($style)\]'
-
-[fossil_metrics]
-format = '\[[+$added]($added_style)\]\[[-$deleted]($deleted_style)\]'
-
-[gcloud]
-format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
+# ============================================================
+# Git
+# ============================================================
 
 [git_branch]
-format = '\[[$symbol$branch]($style)\]'
-
-[git_commit]
-format = '\[[\($hash$tag\)]($style)\]'
-
-[git_metrics]
-format = '\[[+$added]($added_style)\]\[[-$deleted]($deleted_style)\]'
-
-[git_state]
-format = '\[[$state ($progress_current/$progress_total)]($style)\]'
+symbol = ' '
+style = 'bold violet'
+format = 'on [$symbol$branch]($style) '
 
 [git_status]
-format = '([\[$all_status$ahead_behind\]]($style))'
+style = 'bold magenta'
+format = '([$all_status$ahead_behind]($style) )'
 
-[gleam]
-format = '\[[$symbol($version)]($style)\]'
+conflicted = '=${count}'
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+up_to_date = ''
+untracked = '?${count}'
+stashed = '*${count}'
+modified = '!${count}'
+staged = '+${count}'
+renamed = '»${count}'
+deleted = '✘${count}'
 
-[golang]
-format = '\[[$symbol($version)]($style)\]'
+# ============================================================
+# Prompt character
+# ============================================================
 
-[gradle]
-format = '\[[$symbol($version)]($style)\]'
+[character]
+success_symbol = '[❯](bold cyan)'
+error_symbol = '[❯](bold magenta)'
+vimcmd_symbol = '[❮](bold violet)'
+vimcmd_replace_one_symbol = '[❮](bold magenta)'
+vimcmd_replace_symbol = '[❮](bold magenta)'
+vimcmd_visual_symbol = '[❮](bold violet)'
 
-[guix_shell]
-format = '\[[$symbol]($style)\]'
+# ============================================================
+# Command status and duration
+# ============================================================
 
-[haskell]
-format = '\[[$symbol($version)]($style)\]'
-
-[haxe]
-format = '\[[$symbol($version)]($style)\]'
-
-[helm]
-format = '\[[$symbol($version)]($style)\]'
-
-[hg_branch]
-format = '\[[$symbol$branch]($style)\]'
-
-[hostname]
-format = '\[[$ssh_symbol($hostname)]($style)\] '
-
-[java]
-format = '\[[$symbol($version)]($style)\]'
-
-[jobs]
-format = '\[[$symbol$number]($style)\]'
-
-[julia]
-format = '\[[$symbol($version)]($style)\]'
-
-[kotlin]
-format = '\[[$symbol($version)]($style)\]'
-
-[kubernetes]
-format = '\[[$symbol$context( \($namespace\))]($style)\]'
-
-[localip]
-format = '\[[$localipv4]($style)\]'
-
-[lua]
-format = '\[[$symbol($version)]($style)\]'
-
-[memory_usage]
-format = '\[$symbol[$ram( | $swap)]($style)\]'
-
-[meson]
-format = '\[[$symbol$project]($style)\]'
-
-[mise]
-format = '\[[$symbol$health]($style)\]'
-
-[mojo]
-format = '\[[$symbol($version)]($style)\]'
-
-[nats]
-format = '\[[$symbol$name]($style)\]'
-
-[netns]
-format = '\[[$symbol \[$name\]]($style)\]'
-
-[nim]
-format = '\[[$symbol($version)]($style)\]'
-
-[nix_shell]
-format = '\[[$symbol$state( \($name\))]($style)\]'
-
-[nodejs]
-format = '\[[$symbol($version)]($style)\]'
-
-[ocaml]
-format = '\[[$symbol($version)(\($switch_indicator$switch_name\))]($style)\]'
-
-[odin]
-format = '\[[$symbol($version )]($style)\]'
-
-[opa]
-format = '\[[$symbol($version)]($style)\]'
-
-[openstack]
-format = '\[[$symbol$cloud(\($project\))]($style)\]'
-
-[os]
-format = '\[[$symbol]($style)\]'
-
-[package]
-format = '\[[$symbol$version]($style)\]'
-
-[perl]
-format = '\[[$symbol($version)]($style)\]'
-
-[php]
-format = '\[[$symbol($version)]($style)\]'
-
-[pijul_channel]
-format = '\[[$symbol$channel]($style)\]'
-
-[pixi]
-format = '\[[$symbol$version( $environment)]($style)\]'
-
-[pulumi]
-format = '\[[$symbol$stack]($style)\]'
-
-[purescript]
-format = '\[[$symbol($version)]($style)\]'
-
-[python]
-format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
-
-[quarto]
-format = '\[[$symbol($version)]($style)\]'
-
-[raku]
-format = '\[[$symbol($version-$vm_version)]($style)\]'
-
-[red]
-format = '\[[$symbol($version)]($style)\]'
-
-[rlang]
-format = '\[[$symbol($version)]($style)\]'
-
-[ruby]
-format = '\[[$symbol($version)]($style)\]'
-
-[rust]
-format = '\[[$symbol($version)]($style)\]'
-
-[scala]
-format = '\[[$symbol($version)]($style)\]'
-
-[shell]
-format = '\[[$indicator]($style)\]'
-
-[singularity]
-format = '\[[$symbol\[$env\]]($style)\]'
-
-[solidity]
-format = '\[[$symbol($version)]($style)\]'
-
-[spack]
-format = '\[[$symbol$environment]($style)\]'
+[cmd_duration]
+min_time = 1000
+format = 'took [$duration]($style) '
+style = 'muted'
 
 [status]
-format = '\[[$symbol$status]($style)\]'
+style = 'bold magenta'
+symbol = '✗ '
+success_symbol = ''
+format = '[$symbol$status]($style) '
+disabled = false
 
-[sudo]
-format = '\[[as $symbol]($style)\]'
-
-[swift]
-format = '\[[$symbol($version)]($style)\]'
-
-[terraform]
-format = '\[[$symbol$workspace]($style)\]'
-
-[time]
-format = '\[[$time]($style)\]'
-
-[typst]
-format = '\[[$symbol($version)]($style)\]'
+# ============================================================
+# User and host
+# ============================================================
 
 [username]
-format = '\[[$user]($style)\]'
+style_user = 'bold cyan'
+style_root = 'bold magenta'
+show_always = false
+format = '[$user]($style) '
+
+[hostname]
+style = 'bold violet'
+ssh_only = true
+format = '[@$hostname]($style) '
+
+# ============================================================
+# Programming languages and runtimes
+# ============================================================
+
+[buf]
+style = 'bold cyan'
+format = '(with [$symbol($version )]($style))'
+
+[bun]
+style = 'bold green'
+format = '(via [$symbol($version )]($style))'
+
+[c]
+style = 'bold cyan'
+format = '(via [$symbol($version(-$name) )]($style))'
+
+[cpp]
+style = 'bold cyan'
+format = '(via [$symbol($version(-$name) )]($style))'
+
+[cmake]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[cobol]
+style = 'bold violet'
+format = '(via [$symbol($version )]($style))'
+
+[crystal]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[daml]
+style = 'bold violet'
+format = '(via [$symbol($version )]($style))'
+
+[dart]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[deno]
+style = 'bold green'
+format = '(via [$symbol($version )]($style))'
+
+[dotnet]
+style = 'bold violet'
+format = '(via [$symbol($version )($tfm )]($style))'
+
+[elixir]
+style = 'bold magenta'
+format = '(via [$symbol($version \\(OTP $otp_version\\) )]($style))'
+
+[elm]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[erlang]
+style = 'bold magenta'
+format = '(via [$symbol($version )]($style))'
+
+[fennel]
+style = 'bold violet'
+format = '(via [$symbol($version )]($style))'
+
+[fortran]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[gleam]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[golang]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[haskell]
+style = 'bold violet'
+format = '(via [$symbol($version )]($style))'
+
+[helm]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[java]
+style = 'bold magenta'
+format = '(via [$symbol($version )]($style))'
+
+[julia]
+style = 'bold violet'
+format = '(via [$symbol($version )]($style))'
+
+[kotlin]
+style = 'bold magenta'
+format = '(via [$symbol($version )]($style))'
+
+[lua]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[nim]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[nodejs]
+style = 'bold green'
+format = '(via [$symbol($version )]($style))'
+
+[ocaml]
+style = 'bold magenta'
+format = '(via [$symbol($version )(\\($switch_indicator$switch_name\\) )]($style))'
+
+[opa]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[package]
+style = 'muted'
+format = '(is [$symbol$version]($style) )'
+
+[perl]
+style = 'bold violet'
+format = '(via [$symbol($version )]($style))'
+
+[php]
+style = 'bold violet'
+format = '(via [$symbol($version )]($style))'
+
+[purescript]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[python]
+style = 'bold violet'
+format = '(via [${symbol}${pyenv_prefix}(${version} )(\\($virtualenv\\) )]($style))'
+
+[quarto]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[raku]
+style = 'bold violet'
+format = '(via [$symbol($version-$vm_version )]($style))'
+
+[red]
+style = 'bold magenta'
+format = '(via [$symbol($version )]($style))'
+
+[rlang]
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
+
+[ruby]
+style = 'bold magenta'
+format = '(via [$symbol($version )]($style))'
+
+[rust]
+style = 'bold magenta'
+format = '(via [$symbol($version )]($style))'
+
+[scala]
+style = 'bold magenta'
+format = '(via [$symbol($version )]($style))'
+
+[swift]
+style = 'bold magenta'
+format = '(via [$symbol($version )]($style))'
+
+[typst]
+style = 'bold violet'
+format = '(via [$symbol($version )]($style))'
 
 [vagrant]
-format = '\[[$symbol($version)]($style)\]'
-
-[vcsh]
-format = '\[vcsh [$symbol$repo]($style)\]'
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
 
 [vlang]
-format = '\[[$symbol($version)]($style)\]'
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
 
 [xmake]
-format = '\[[$symbol($version)]($style)\]'
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'
 
 [zig]
-format = '\[[$symbol($version)]($style)\]'
+style = 'bold cyan'
+format = '(via [$symbol($version )]($style))'

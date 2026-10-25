@@ -1,30 +1,40 @@
+# Authentication
 ignore-empty-password
 
-color=1d1f21
+# Background
+color=050816
+image=/home/miguel/Pictures/Wallpapers/vaporcore.png
+scaling=fill
+
+# Input indicator
 indicator-idle-visible
-indicator-radius=150
-indicator-thickness=30
+indicator-radius=100
+indicator-thickness=8
 
-inside-color=1d1f21
-inside-clear-color=1d1f21
-inside-ver-color=1d1f21
-inside-wrong-color=1d1f21
+# Indicator interior
+inside-color=050816cc
+inside-clear-color=050816cc
+inside-ver-color=071dffcc
+inside-wrong-color=ff29e8cc
 
-key-hl-color=7aa6daaa
-bs-hl-color=d54e53aa
+# Key feedback
+key-hl-color=00f5ff
+bs-hl-color=ff29e8
 
-separator-color=55555555
-
-line-color=1d1f21
+# Separator and outline
+separator-color=00f5ff55
+line-color=05081600
 line-uses-ring
 
-text-color=81a2be
-text-clear-color=b5bd68
-text-caps-lock-color=f0c674
-text-ver-color=81a2be
-text-wrong-color=cc6666
+# Text
+text-color=f7f4ff
+text-clear-color=00f5ff
+text-caps-lock-color=ff29e8
+text-ver-color=f7f4ff
+text-wrong-color=ff29e8
 
-ring-color=81a2be55
-ring-ver-color=81a2be
-ring-clear-color=b5bd6811
-ring-wrong-color=cc6666
+# Indicator ring
+ring-color=00f5ff99
+ring-ver-color=071dff
+ring-clear-color=00f5ff
+ring-wrong-color=ff29e8
