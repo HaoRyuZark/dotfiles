@@ -9,7 +9,6 @@ if [[ $# -lt 1 ]]; then
 fi
 
 MODE="$1"
-OS="$2"
 
 PATHS=(
   "$HOME/Homo_Deus/Programming"
@@ -29,15 +28,9 @@ if [[ "$MODE" == "push" ]]; then
     DATE="$(date): Backup"
 
     for path in "${PATHS[@]}"; do
-        cd "$path"
-        
+        cd "$path" 
         git add .
         git commit -m "$MESSAGE ($DATE)" || echo "Nothing to commit in $path"
-
-        if [[ "$path" == "$HOME/dotfiles" &&  "$OS" == "fedora" ]]; then  
-            git push -u origin fedora
-        fi
-
         git push -u origin main  
     done
 
