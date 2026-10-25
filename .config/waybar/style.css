@@ -77,6 +77,24 @@ window#waybar.empty {
     background-color: #257DF5;
 }
 
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#network:hover,
+#pulseaudio:hover,
+#custom-media:hover,
+#tray:hover,
+#mode:hover,
+#idle_inhibitor:hover,
+#language:hover,
+#battery.charging:hover,
+#mpd:hover {
+    background-color: #071B3D;
+    color: #00D8E8;
+}
+
 /*
 #window {
     padding: 0 10px;
@@ -110,7 +128,7 @@ window#waybar.empty {
 
 #battery.charging {
     color: #ffffff;
-    background-color: #299dc2;
+    background-color: #257DF5;
 }
 
 @keyframes blink {
