@@ -21,7 +21,9 @@ exec /usr/bin/gnome-keyring-daemon --start --components=secrets
 exec_always autotiling -l 5
 
 ### Opacity
-for_window [title=".*"] opacity 1
+for_window [app_id="kitty"] opacity 0.9
+for_window [app_id="com.microsoft.VSCode"] opacity 0.9
+for_window [app_id="dev.zed.Zed"] opacity 0.9
 
 ### Variables
 
@@ -273,7 +275,16 @@ bindsym $mod+r mode "resize"
 bindsym $mod+w exec ~/dotfiles/scripts/random-wallpaper.sh
 
 # Lock Screen
-bindsym $mod+c exec swaylock -f
+
+bindsym $mod+Shift+x exec swaylock \
+    --config ~/.config/swaylock/config \
+    --image "/home/miguel/Pictures/Wallpapers/vaporcore.png" \
+    --scaling fill \
+    --effect-blur 7x5 \
+    --effect-vignette 0.5:0.5
+
+# Old functionality without the image
+# bindsym $mod+c exec swaylock -f
 
 #
 # Status Bar:
