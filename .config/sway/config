@@ -286,6 +286,13 @@ bindsym $mod+Shift+x exec swaylock \
 # Old functionality without the image
 # bindsym $mod+c exec swaylock -f
 
+# Go to next workspce
+bindsym $mod+Tab workspace next_on_output
+
+# Go to previous workspace
+bindsym $mod+Shift+Tab workspace prev_on_output
+
+
 #
 # Status Bar:
 #
