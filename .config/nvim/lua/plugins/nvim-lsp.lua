@@ -52,11 +52,10 @@ return {
 				"cssls", -- CSS / SCSS / Less
 				"bashls", -- Bash / Shell scripts
 				"texlab", -- LaTeX
-				"marksman", -- Markdown
 				"jdtls", -- Java (Eclipse JDT LS)
 				"hls", -- Haskell
 				"stylua", -- Lua formatter (used by conform.nvim / manual :lua vim.lsp.buf.format)
-				--        'rust_analyzer',-- Rust
+				"rust_analyzer", -- Rust
 				"asm-lsp", -- assembly
 			},
 		},
@@ -160,74 +159,68 @@ return {
 					},
 				},
 
-				--[[
-        rust_analyzer = {
-          settings = {
-            ['rust-analyzer'] = {
-              -- Use clippy for richer linting on every save.
-              check = {
-                command   = 'clippy',
-                extraArgs = { '--all-targets', '--all-features' },
-              },
+				rust_analyzer = {
+					settings = {
+						["rust-analyzer"] = {
+							-- Use clippy for richer linting on every save.
+							check = {
+								command = "clippy",
+								extraArgs = { "--all-targets", "--all-features" },
+							},
 
-              -- Cargo: enable all features and run build scripts so
-              -- proc-macro and generated types are available.
-              cargo = {
-                allFeatures        = true,
-                loadOutDirsFromCheck = true,
-                runBuildScripts    = true,
-              },
+							-- Cargo: enable all features and run build scripts so
+							-- proc-macro and generated types are available.
+							cargo = {
+								allFeatures = true,
+								loadOutDirsFromCheck = true,
+								runBuildScripts = true,
+							},
 
-              -- Proc macros: expand them so the server can type-check
-              -- macro-generated code (e.g. serde, tokio::main).
-              procMacro = {
-                enable = true,
-              },
+							-- Proc macros: expand them so the server can type-check
+							-- macro-generated code (e.g. serde, tokio::main).
+							procMacro = {
+								enable = true,
+							},
 
-              -- Completion extras.
-              completion = {
-                autoimport           = { enable = true },
-                autoself             = { enable = true },
-                fullFunctionSignatures = { enable = true },
-              },
+							-- Completion extras.
+							completion = {
+								autoimport = { enable = true },
+								autoself = { enable = true },
+								fullFunctionSignatures = { enable = true },
+							},
 
-              -- Diagnostics: turn on experimental and style lints.
-              diagnostics = {
-                enable       = true,
-                experimental = { enable = true },
-                styleLints   = { enable = true },
-              },
+							-- Diagnostics: turn on experimental and style lints.
+							diagnostics = {
+								enable = true,
+								experimental = { enable = true },
+								styleLints = { enable = true },
+							},
 
-              -- Inlay hints (ghost text): every hint type turned on.
-              inlayHints = {
-                bindingModeHints          = { enable = true },
-                chainingHints             = { enable = true },
-                closingBraceHints         = { enable = true, minLines = 10 },
-                closureCaptureHints       = { enable = true },
-                closureReturnTypeHints    = { enable = 'always' },
-                discriminantHints         = { enable = 'always' },
-                expressionAdjustmentHints = { enable = 'always' },
-                implicitDrops             = { enable = true },
-                lifetimeElisionHints      = { enable = 'always', useParameterNames = true },
-                maxLength                 = nil,   -- no truncation
-                parameterHints            = { enable = true },
-                rangeExclusiveHints       = { enable = true },
-                reborrowHints             = { enable = 'always' },
-                renderColons              = true,
-                typeHints                 = {
-                  enable                       = true,
-                  hideClosureInitialization    = false,
-                  hideNamedConstructor         = false,
-                },
-              },
-            },
-          },
-        },
-        ]]
-
-				-- Markdown: plain defaults work well.
-				marksman = {},
-
+							-- Inlay hints (ghost text): every hint type turned on.
+							inlayHints = {
+								bindingModeHints = { enable = true },
+								chainingHints = { enable = true },
+								closingBraceHints = { enable = true, minLines = 10 },
+								closureCaptureHints = { enable = true },
+								closureReturnTypeHints = { enable = "always" },
+								discriminantHints = { enable = "always" },
+								expressionAdjustmentHints = { enable = "always" },
+								implicitDrops = { enable = true },
+								lifetimeElisionHints = { enable = "always", useParameterNames = true },
+								maxLength = nil, -- no truncation
+								parameterHints = { enable = true },
+								rangeExclusiveHints = { enable = true },
+								reborrowHints = { enable = "always" },
+								renderColons = true,
+								typeHints = {
+									enable = true,
+									hideClosureInitialization = false,
+									hideNamedConstructor = false,
+								},
+							},
+						},
+					},
+				},
 				-- Java: mason-lspconfig automatically sets up the per-project
 				-- workspace directory that jdtls requires — no extra config needed.
 				jdtls = {},
@@ -311,7 +304,16 @@ return {
 
 					-- Code actions: quick-fixes, auto-imports, extract-function, etc.
 					-- VSCode equivalent: Ctrl+.
-					map("<C-.>", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
+					map("<C-.>", function()
+						local word = vim.fn.expand("<word>")
+						if vim.wo.spell and vim.fn.spellbadword(word)[1] ~= "" then
+							vim.cmd.normal({ "z=", bang = true })
+						else
+							vim.lsp.buf.code_action()
+						end
+					end, "Spelling / Code Action", { "n", "x" })
+
+					map("<C-.>", vim.lsp.buf.code_action, "Code Action", "x")
 
 					-- Format the current buffer via the LSP formatter.
 					-- <S-A-f> mirrors VSCode's Shift+Alt+F.  The global mapping in
