@@ -20,6 +20,7 @@ PATHS=(
   "$HOME/Documents/Notes/"
   "$HOME/Homo_Deus/Projects/anime_migux/"
   "$HOME/Homo_Deus/Projects/migux_library/"
+  "$HOME/Homo_Deus/Research_and_Notetaking/"
 )
 
 if [[ "$MODE" == "push" ]]; then
