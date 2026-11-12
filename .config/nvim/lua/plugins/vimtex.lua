@@ -16,7 +16,7 @@ return {
 			pattern = "tex",
 			callback = function(event)
 				vim.opt_local.conceallevel = 2
-				vim.opt_local.wrap = true
+				vim.opt_local.wrap = false
 				vim.opt_local.linebreak = true
 
 				local ok, wk = pcall(require, "which-key")
