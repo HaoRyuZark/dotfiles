@@ -16,19 +16,18 @@ map("n", "<C-D-Up>", "<Cmd>resize +2<CR>", opts)
 map("n", "<C-D-Down>", "<Cmd>resize -2<CR>", opts)
 
 -- Moving Lines in visual mode
-map("v", "J", ":m '>+1<CR>gv=gv'", { desc = "Moves lines down in visual mode" })
-map("v", "K", ":m '<-2<CR>gv=gv'", { desc = "Moves lines up in visual mode" })
+map("x", "J", ":m '>+1<CR>gv=gv", { silent = true, desc = "Moves lines down in visual mode" })
+map("x", "K", ":m '<-2<CR>gv=gv", { silent = true, desc = "Moves lines up in visual mode" })
 map("v", ">", ">gv", { desc = "Indents the line" })
 map("v", "<", "<gv", { desc = "Un-indents the line" })
 
 -- Remember yanked after pasting
-map("v", "p", '"_dp')
+map("x", "p", "P", { desc = "Paste without yanking" })
 
 -- Clear search results
 map("n", "<C-c>", ":nohl<CR>", { desc = "Clear search hl", silent = true })
 
--- Format code
-map("n", "<S-A-f>", vim.lsp.buf.format)
+-- Format code: <S-A-f> is defined in lua/plugins/format.lua (conform)
 
 -- Replace the word cursor is on globally
 map(
@@ -60,9 +59,11 @@ for i = 1, 9 do
 end
 
 -- LSP keymaps are set buffer-locally in lua/plugins/nvim-lsp.lua via LspAttach.
--- See that file for the full list: gd, gD, gr, gI, K, <leader>rn, <leader>ca,
--- <S-A-f>, ]d/[d, ]e/[e, <leader>e, <leader>q, <leader>ds, <leader>ws, <F2>, etc.
-map("n", "<leader>fr", require("telescope.builtin").lsp_references, { buffer = 0, desc = "Get references" })
+-- See that file for the full list: <leader>g*, K, <C-k><C-i>, <F2>, <F12>, <S-F12>,
+-- <leader>rn, ]d/[d, ]e/[e, <leader>e, <leader>q, etc.
+map("n", "<leader>fr", function()
+	require("telescope.builtin").lsp_references()
+end, { desc = "Get references" })
 
 -- Neo Tree
 map("n", "<C-S-e>", ":Neotree toggle right<CR>", { noremap = true, silent = true, desc = "Toggle Neotree (right)" }) --toggle neotree on the right
@@ -86,7 +87,30 @@ map("n", "<leader>fg", builtin.live_grep, { desc = "Live grep" })
 map("n", "<leader>fo", builtin.buffers, { desc = "Old files" })
 map("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
 
--- Fallback for txt files where no lsp is present
-vim.keymap.set("n", "<C-.>", function()
-    vim.cmd.normal({ "z=", bang = true })
-end, { desc = "Spelling suggestions" })
+-- VSCode Ctrl+. : spell suggestions on a misspelled word, else LSP code action, else z=
+local function spell_suggest()
+	if not pcall(function()
+		require("fzf-lua").spell_suggest()
+	end) then
+		vim.cmd.normal({ "z=", bang = true })
+	end
+end
+
+map({ "n", "x" }, "<C-.>", function()
+	local has_action = #vim.lsp.get_clients({ bufnr = 0, method = "textDocument/codeAction" }) > 0
+	if vim.fn.mode() ~= "n" then
+		if has_action then
+			vim.lsp.buf.code_action()
+		end
+		return
+	end
+	if vim.wo.spell and vim.fn.spellbadword(vim.fn.expand("<cword>"))[1] ~= "" then
+		spell_suggest()
+	elseif has_action then
+		vim.lsp.buf.code_action()
+	elseif vim.wo.spell then
+		spell_suggest()
+	else
+		vim.notify("No code actions or spell checking available", vim.log.levels.INFO)
+	end
+end, { desc = "Spell suggestions / Code action" })

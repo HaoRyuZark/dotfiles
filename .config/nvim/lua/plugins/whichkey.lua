@@ -10,13 +10,14 @@ return {
 		{ "<leader>ht", group = "Toggle" },
 		{ "<leader>g",  group = "LSP" },
 		{ "<leader>z",  group = "Copilot" },
-		{ "<leader>o",  group = "Terminal" },
+		{ "<leader>a",  group = "Claude Code" },
+		{ "<leader>G",  group = "Git" },
+		{ "<leader>D",  group = "Database" },
 		{ "<leader>t",  group = "Tabs" },
 		{ "<leader>s",  group = "Noice" },
 		{ "<leader>sn", group = "Noice" },
 		{ "<leader>r",  group = "Replace" },
-		{ "<leader>l",  group = "LaTeX" },
-		{ "<leader>c",  group = "All Commands" },
+		{ "<leader>c",  desc = "Show All Commands" },
 
 		-- Find / Telescope
 		{ "<leader>fg", desc = "Live Grep" },
@@ -47,20 +48,15 @@ return {
 		{ "<leader>gs",  desc = "Document Symbols" },
 		{ "<leader>gws", desc = "Workspace Symbols" },
 		{ "<leader>gT",  desc = "Toggle Inlay Hints" },
+		{ "<leader>gp",  desc = "Peek Definition" },
+		{ "<leader>gP",  desc = "Close Peek Windows" },
+		{ "<C-k><C-i>",  desc = "Hover Documentation" },
+		{ "<C-.>",       desc = "Spell / Code Action", mode = { "n", "x" } },
 		{ "<leader>e",   desc = "Show Line Diagnostics" },
 		{ "<leader>q",   desc = "Diagnostics to Loclist" },
 
 		-- Copilot
-		{ "<leader>zc", desc = "Open Copilot Chat" },
-		{ "<leader>ze", desc = "Explain Code",    mode = "v" },
-		{ "<leader>zr", desc = "Review Code",     mode = "v" },
-		{ "<leader>zf", desc = "Fix Code Issues", mode = "v" },
-		{ "<leader>zo", desc = "Optimize Code",   mode = "v" },
-		{ "<leader>zd", desc = "Generate Docs",   mode = "v" },
-		{ "<leader>zt", desc = "Generate Tests",  mode = "v" },
-
-		-- Terminal
-		{ "<leader>ot", desc = "Open Terminal" },
+		-- (descriptions come from the lazy `keys` specs in copilot.lua)
 
 		-- Tabs
 		{ "<leader>tc", desc = "Close Tab" },
@@ -86,17 +82,17 @@ return {
 		{ "<C-D-Down>",  desc = "Horizontal Resize -2" },
 
 		-- Visual Mode
-		{ "J", desc = "Move Lines Down",    mode = "v" },
-		{ "K", desc = "Move Lines Up",      mode = "v" },
+		{ "J", desc = "Move Lines Down",    mode = "x" },
+		{ "K", desc = "Move Lines Up",      mode = "x" },
 		{ ">", desc = "Indent",             mode = "v" },
 		{ "<", desc = "Un-indent",          mode = "v" },
-		{ "p", desc = "Paste (Keep Yank)",  mode = "v" },
+		{ "p", desc = "Paste (Keep Yank)",  mode = "x" },
 
 		-- General
 		{ "<C-c>",   desc = "Clear Search Highlight" },
 		{ "<C-a>",   desc = "Select All" },
 		{ "<C-p>",   desc = "Find Files" },
-		{ "<C-b>",   desc = "Toggle File Explorer" },
+		{ "<C-S-e>", desc = "Toggle File Explorer" },
 		{ "<C-t>",   desc = "Open New Tab" },
 		{ "<C-n>",   desc = "Next Tab" },
 

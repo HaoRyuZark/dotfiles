@@ -38,7 +38,13 @@ return {
 				return
 			end
 
-			local lang = vim.treesitter.language.get_lang(vim.bo[bufnr].filetype)
+			-- Leave LaTeX highlighting to VimTeX's syntax engine.
+			local ft = vim.bo[bufnr].filetype
+			if ft == "tex" or ft == "plaintex" or ft == "bib" then
+				return
+			end
+
+			local lang = vim.treesitter.language.get_lang(ft)
 			if not lang or not vim.list_contains(treesitter.get_installed("parsers"), lang) then
 				return
 			end

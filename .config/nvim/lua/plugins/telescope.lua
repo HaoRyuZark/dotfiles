@@ -3,11 +3,6 @@ return {
         dependencies = { "nvim-lua/plenary.nvim", },
         config = function()
           require("telescope").setup({
-            extensions = {
-              ["ui-select"] = {
-                require("telescope.themes").get_dropdown({}),
-              },
-            },
             defaults = {
               vimgrep_arguments = {
                 "rg",
@@ -37,6 +32,5 @@ return {
               },
             },
           })
-          require("telescope").load_extension("ui-select")
         end,
 }

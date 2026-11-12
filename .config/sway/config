@@ -7,7 +7,7 @@
 ### Autostart
 
 # Polkit for security prompts
-exec /usr/share/lxqt/translations/lxqt-policykit-agent/lxqt-policykit-agent_id.en
+exec /usr/libexec/lxqt-policykit-agent
 
 # Activate Notification Daemon 
 # exec dunst
@@ -51,7 +51,9 @@ set $browser brave-browser
 # Background Image
 output * bg ~/Pictures/Wallpapers/vaporcore.png fill
 # We need to specify the resolution of our device to render the image right
-output eDP-1 resolution 1920x1080 position 1920,0
+# Layout must start at 0,0 or XWayland popups/dialogs get placed off-screen
+output eDP-1 resolution 1920x1080 position 0,0
+output DP-2 position 1920,0
 
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 

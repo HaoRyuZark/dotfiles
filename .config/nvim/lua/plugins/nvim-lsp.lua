@@ -55,6 +55,9 @@ return {
 				"jdtls", -- Java (Eclipse JDT LS)
 				"hls", -- Haskell
 				"stylua", -- Lua formatter (used by conform.nvim / manual :lua vim.lsp.buf.format)
+				"black", -- Python formatter (conform)
+				"isort", -- Python import sorter (conform)
+				"prettierd", -- JS/TS formatter (conform)
 				"rust_analyzer", -- Rust
 				"asm-lsp", -- assembly
 			},
@@ -149,11 +152,11 @@ return {
 				-- Bash: extend to .zsh files as well.
 				bashls = { filetypes = { "sh", "bash", "zsh" } },
 
-				-- LaTeX: build on save, enable chktex linting on edit.
+				-- LaTeX: VimTeX compiles, texlab only lints (chktex).
 				texlab = {
 					settings = {
 						texlab = {
-							build = { onSave = true },
+							build = { onSave = false },
 							chktex = { onEdit = true, onOpenAndSave = true },
 						},
 					},
@@ -225,7 +228,7 @@ return {
 				-- workspace directory that jdtls requires — no extra config needed.
 				jdtls = {},
 
-				julia_lsp = { filetypes = { "jl" } },
+				julia_lsp = { filetypes = { "julia" } },
 
 				asm_lsp = {},
 
@@ -288,40 +291,35 @@ return {
 						require("fzf-lua").lsp_workspace_symbols()
 					end, "Workspace Symbols")
 
+					-- VSCode F12 / Shift+F12
+					map("<F12>", function()
+						require("fzf-lua").lsp_definitions()
+					end, "Go to Definition")
+					map("<S-F12>", function()
+						require("fzf-lua").lsp_references()
+					end, "Go to References")
+
 					-- Documentation
 					-- K shows the hover popup
 					-- Press K a second time to jump into the float; then use j/k to
 					-- scroll.  noice.nvim also maps <C-f>/<C-b> to scroll the float
 					-- from normal/insert mode (see noice.lua).
-					map("K", vim.lsp.buf.hover, "Hover Documentation")
+					local hover = function()
+						vim.lsp.buf.hover({ border = "rounded" })
+					end
+					map("K", hover, "Hover Documentation")
+					-- VSCode Ctrl+K Ctrl+I; <Tab> variant for terminals that send Tab for <C-i>
+					map("<C-k><C-i>", hover, "Hover Documentation (Ctrl+K Ctrl+I)")
+					map("<C-k><Tab>", hover, "Hover Documentation (Ctrl+K Ctrl+I)")
 
-					-- Signature help while typing function arguments
-					map("<C-k>", vim.lsp.buf.signature_help, "Signature Help", "i")
+					-- Signature help: handled by blink.cmp (<C-k> toggles it in insert mode)
 
 					-- Refactoring
 					map("<F2>", vim.lsp.buf.rename, "Rename Symbol")
 					map("<leader>rn", vim.lsp.buf.rename, "Rename Symbol")
 
-					-- Code actions: quick-fixes, auto-imports, extract-function, etc.
-					-- VSCode equivalent: Ctrl+.
-					map("<C-.>", function()
-						local word = vim.fn.expand("<word>")
-						if vim.wo.spell and vim.fn.spellbadword(word)[1] ~= "" then
-							vim.cmd.normal({ "z=", bang = true })
-						else
-							vim.lsp.buf.code_action()
-						end
-					end, "Spelling / Code Action", { "n", "x" })
-
-					map("<C-.>", vim.lsp.buf.code_action, "Code Action", "x")
-
-					-- Format the current buffer via the LSP formatter.
-					-- <S-A-f> mirrors VSCode's Shift+Alt+F.  The global mapping in
-					-- keymaps.lua uses the same key; this buffer-local one takes
-					-- precedence when an LSP is active.
-					map("<S-A-f>", function()
-						vim.lsp.buf.format({ async = true })
-					end, "Format Buffer")
+					-- Code actions (<C-.>) and formatting (<S-A-f>) are global:
+					-- see lua/keymaps.lua and lua/plugins/format.lua.
 
 					-- Diagnostics
 					-- Jump forward/backward through all diagnostics (VSCode: F8 / Shift+F8).

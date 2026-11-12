@@ -68,25 +68,33 @@ vim.opt.concealcursor = ""
 vim.opt.completeopt = { "menuone", "noselect", "noinsert" }
 vim.opt.shortmess = vim.opt.shortmess + { c = true }
 
--- Show diagnostics
-vim.cmd([[
-set signcolumn=yes
-autocmd CursorHold * lua vim.diagnostic.open_float(nil, { focusable = false })
-]])
+-- Faster CursorHold (diagnostic float, LSP document highlight)
+vim.opt.updatetime = 250
 
--- Spell Checker for Markdown, tex, text and env files
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = { "markdown", "text", "tex" },
+-- Show diagnostics on hold, unless another float (hover, peek, ...) is open
+vim.api.nvim_create_autocmd("CursorHold", {
+	group = vim.api.nvim_create_augroup("user-diagnostic-float", { clear = true }),
 	callback = function()
-		vim.opt.spell = true
-		vim.opt.spelllang = "en_us"
+		for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+			if vim.api.nvim_win_get_config(win).relative ~= "" then
+				return
+			end
+		end
+		vim.diagnostic.open_float(nil, { focusable = false, scope = "cursor" })
 	end,
 })
 
-vim.g.autoformat = false
+-- Spell Checker for Markdown, tex, text, env and git commit files
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = { "markdown", "text", "tex", "gitcommit" },
+	callback = function()
+		vim.opt_local.spell = true
+		vim.opt_local.spelllang = "en_us"
+	end,
+})
 
 vim.api.nvim_create_autocmd("BufEnter", {
 	callback = function()
-		vim.opt_local.formatoptions:remove({ "c", "r", "o2" })
+		vim.opt_local.formatoptions:remove({ "c", "r", "o" })
 	end,
 })

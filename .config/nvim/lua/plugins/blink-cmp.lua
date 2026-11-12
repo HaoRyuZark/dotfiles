@@ -35,7 +35,15 @@ return {
     -- lazydev teaches the Lua LSP about Neovim's runtime types so you get
     -- accurate completion for vim.*, require('...'), and plugin APIs while
     -- editing your own config.
-    'folke/lazydev.nvim',
+    {
+      'folke/lazydev.nvim',
+      ft = 'lua',
+      opts = {
+        library = {
+          { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+        },
+      },
+    },
   },
 
   opts = {
@@ -51,14 +59,25 @@ return {
     keymap = {
       preset = 'default',
 
-      -- <Enter> confirms the highlighted item (falls back to a normal newline
+      -- <CR> confirms the highlighted item (falls back to a normal newline
       -- when the menu is closed, so it won't swallow blank lines).
-      ['<Enter>'] = { 'accept', 'fallback' },
+      ['<CR>'] = { 'accept', 'fallback' },
 
-      -- <Tab> accepts the current ghost-text / selected item, then advances
-      -- the snippet cursor if we are inside a snippet, otherwise inserts a
-      -- regular tab.  This matches the VSCode IntelliSense / Copilot feel.
-      ['<Tab>']   = { 'accept', 'snippet_forward', 'fallback' },
+      -- <Tab>: Copilot suggestion if visible, else accept the selected item,
+      -- else jump to the next snippet placeholder, else insert a tab.
+      ['<Tab>']   = {
+        function()
+          local ok, s = pcall(require, 'copilot.suggestion')
+          if ok and s.is_visible() then
+            s.accept()
+            return true
+          end
+        end,
+        'accept',
+        'snippet_forward',
+        'fallback',
+      },
+      ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
     },
 
     appearance = {
@@ -68,10 +87,8 @@ return {
     },
 
     completion = {
-      -- Ghost text: renders the top completion candidate as faded inline text
-      -- to the right of the cursor, similar to GitHub Copilot or VS Code.
-      -- Press <Tab> or <Enter> to accept it.
-      ghost_text = { enabled = true },
+      -- Ghost text disabled: Copilot owns inline ghost text.
+      ghost_text = { enabled = false },
 
       -- Documentation popup: shows automatically after a short delay.
       -- Press <C-space> to open it manually, or <C-b>/<C-f> to scroll it
@@ -98,10 +115,15 @@ return {
 
     -- Sources 
     -- Completion candidates come from these sources in priority order.
-    -- 'lazydev' replaces the standard 'lsp' source when editing Neovim Lua
-    -- files so you get typed vim.* API completions.
+    -- 'lazydev' is added for Lua buffers only; dadbod for SQL buffers.
     sources = {
-      default = { 'lsp', 'path', 'snippets', 'buffer', 'lazydev' },
+      default = { 'lsp', 'path', 'snippets', 'buffer' },
+      per_filetype = {
+        lua   = { inherit_defaults = true, 'lazydev' },
+        sql   = { 'dadbod', 'snippets', 'buffer' },
+        mysql = { 'dadbod', 'snippets', 'buffer' },
+        plsql = { 'dadbod', 'snippets', 'buffer' },
+      },
       providers = {
         lazydev = {
           name   = 'LazyDev',
@@ -109,6 +131,7 @@ return {
           -- Push Neovim API items above generic LSP results.
           score_offset = 100,
         },
+        dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
       },
     },
 
