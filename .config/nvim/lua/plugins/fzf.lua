@@ -1,21 +1,12 @@
 return {
-        "https://github.com/ibhagwan/fzf-lua",
-        dependencies = {
-            "https://github.com/elanmed/fzf-lua-frecency.nvim",
-        },
-        event = "VeryLazy",
-        config = function()
-            require("fzf-lua").setup({
-                "max-perf",
-                winopts = {
-                    height = 0.5,
-                    width = 1,
-                    row = 1,
-                },
-            })
-            require("fzf-lua").register_ui_select()
-            require("fzf-lua-frecency").setup({
-                display_score = false,
-            })
-        end,
+	"ibhagwan/fzf-lua",
+	-- optional for icon support
+	dependencies = { "nvim-tree/nvim-web-devicons" },
+	-- or if using mini.icons/mini.nvim
+	-- dependencies = { "nvim-mini/mini.icons" },
+	---@module "fzf-lua"
+	---@type fzf-lua.Config|{}
+	---@diagnostic disable: missing-fields
+	opts = {},
+	---@diagnostic enable: missing-fields
 }
