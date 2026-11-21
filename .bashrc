@@ -39,7 +39,7 @@ alias ll='ls -la --color=auto'
 alias gp='bash $HOME/dotfiles/scripts/gp.sh'
 alias nvimdiff='nvim -d'
 alias audio='pavucontrol'
-alias homo='cd $HOME/Homo_Deus; tmux'
+alias homo='bash $HOME/dotfiles/scripts/homo.sh'
 
 # Haskell Set-up
 # [ -f "/home/miguel/.ghcup/env" ] && . "/home/miguel/.ghcup/env" # ghcup-env
